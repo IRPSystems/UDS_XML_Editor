@@ -3,9 +3,11 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Net.NetworkInformation;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Xml;
 using UDS_XML_Editor.Models;
 using UDS_XML_Editor.Services;
@@ -20,6 +22,7 @@ namespace UDS_XML_Editor.ViewModels
 		public string Path { get; set; }
 
 		public XmlData XmlData { get; set; }
+		public DocingViewModel Docing { get; set; }
 
 		#endregion Properties
 
@@ -38,17 +41,27 @@ namespace UDS_XML_Editor.ViewModels
 
 			BrowseFilePathCommand = new RelayCommand(BrowseFilePath);
 			LoadFileCommand = new RelayCommand(LoadFile);
+			ClosingCommand = new RelayCommand<CancelEventArgs>(Closing);
 
 			_uds_XML_EditorSettings = UDS_XML_EditorSettings.LoadUDS_XML_EditorUserData("UDS_XML_Editor");
 
 			_xmlReader = new XmlReaderService();
+
+			Docing = new DocingViewModel();
 		}
 
 		#endregion Constructor
 
 		#region Methods
 
-		
+		private void Closing(CancelEventArgs e)
+		{
+			UDS_XML_EditorSettings.SaveEvvaUserData(
+				"UDS_XML_Editor",
+				_uds_XML_EditorSettings);
+
+			Docing.Close();
+		}
 
 		private void BrowseFilePath()
 		{
@@ -79,6 +92,8 @@ namespace UDS_XML_Editor.ViewModels
 
 		public RelayCommand BrowseFilePathCommand { get; private set; }
 		public RelayCommand LoadFileCommand { get; private set; }
+
+		public RelayCommand<CancelEventArgs> ClosingCommand { get; private set; }
 
 		#endregion Commands
 	}
