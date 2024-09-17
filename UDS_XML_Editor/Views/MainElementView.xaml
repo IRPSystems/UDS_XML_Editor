@@ -7,27 +7,130 @@
              xmlns:local="clr-namespace:UDS_XML_Editor.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
     
     <Grid>
-        <TextBlock Text="Bla" />
-        <!--<TreeView ItemsSource="{Binding}">
-
-            <TreeView.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}" />
-                </DataTemplate>
-            </TreeView.ItemTemplate>
+        
+        <TreeView ItemsSource="{Binding}" FontSize="14">
 
             <TreeView.Resources>
-                --><!--<HierarchicalDataTemplate DataType="models:Customer" ItemsSource="{Binding FWStepsList}">
-                    
-                </HierarchicalDataTemplate>--><!--
                 
-                
-                
+                <HierarchicalDataTemplate DataType="{x:Type models:Customer}" ItemsSource="{Binding FWStepsList}">
+                    <StackPanel Orientation="Horizontal" Margin="0,1">
+                        <TextBlock Text="Customer" VerticalAlignment="Center" Margin="0,0,20,0" Width="75" FontWeight="DemiBold"/>
+                        
+                        <TextBlock Text="Name" VerticalAlignment="Center" Margin="0,0,5,0" Width="45"/>
+                        <TextBox Text="{Binding Name}" Margin="0,0,50,0" Width="200"/>
+
+                        <TextBlock Text="Rate" VerticalAlignment="Center" Margin="0,0,5,0" Width="35"/>
+                        <TextBox Text="{Binding Rate}" Margin="0,0,50,0" Width="75"/>
+
+                        <TextBlock Text="TxID" VerticalAlignment="Center" Margin="0,0,5,0" Width="35"/>
+                        <TextBox Text="{Binding TxID}" Margin="0,0,50,0" Width="75"/>
+
+                        <TextBlock Text="RxID" VerticalAlignment="Center" Margin="0,0,5,0" Width="35"/>
+                        <TextBox Text="{Binding RxID}" Margin="0,0,50,0" Width="75"/>
+
+                        <TextBlock Text="BCID" VerticalAlignment="Center" Margin="0,0,5,0" Width="55"/>
+                        <TextBox Text="{Binding BCID}" Margin="0,0,50,0" Width="55"/>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+
+                <HierarchicalDataTemplate DataType="{x:Type models:Service}"  ItemsSource="{Binding Sections}">
+                    <StackPanel Orientation="Horizontal" Margin="0,1">
+                        <TextBlock Text="Service" VerticalAlignment="Center" Margin="0,0,20,0" Width="55" FontWeight="DemiBold"/>
+                        
+                        <TextBlock Text="Name" VerticalAlignment="Center" Margin="0,0,5,0" Width="45"/>
+                        <TextBox Text="{Binding Name}" Margin="0,0,50,0" Width="200"/>
+
+                        <TextBlock Text="ID" VerticalAlignment="Center" Margin="0,0,5,0" Width="35"/>
+                        <TextBox Text="{Binding ID}" Margin="0,0,50,0" Width="75"/>
+
+                        <TextBlock Text="DataType" VerticalAlignment="Center" Margin="0,0,5,0" Width="75"/>
+                        <TextBox Text="{Binding DataType}" Margin="0,0,50,0" Width="75"/>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+
+                <HierarchicalDataTemplate DataType="{x:Type models:FWStep}">
+                    <StackPanel Orientation="Horizontal" Margin="0,1">
+                        <TextBlock Text="FWStep" VerticalAlignment="Center" Margin="0,0,20,0" Width="55" FontWeight="DemiBold"/>
+
+                        <TextBlock Text="Name" VerticalAlignment="Center" Margin="0,0,5,0" Width="45"/>
+                        <TextBox Text="{Binding Name}" Margin="0,0,50,0" Width="200"/>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+
+                <HierarchicalDataTemplate DataType="{x:Type models:NamedSection}"  ItemsSource="{Binding Items}">
+                    <StackPanel Orientation="Horizontal" Margin="0,1">
+
+                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="0,0,5,0" Width="75" FontWeight="DemiBold"/>
+                        
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+
+                <HierarchicalDataTemplate DataType="{x:Type models:SubFunc}"  ItemsSource="{Binding FieldsList}">
+                    <StackPanel Orientation="Horizontal" Margin="0,1">
+                        <TextBlock Text="SubFunc" VerticalAlignment="Center" Margin="0,0,20,0" Width="55" FontWeight="DemiBold"/>
+
+                        <TextBlock Text="Name" VerticalAlignment="Center" Margin="0,0,5,0" Width="45"/>
+                        <TextBox Text="{Binding Name}" Margin="0,0,50,0" Width="200"/>
+
+                        <TextBlock Text="ID" VerticalAlignment="Center" Margin="0,0,5,0" Width="25"/>
+                        <TextBox Text="{Binding ID}" Margin="0,0,50,0" Width="75"/>
+
+                        <TextBlock Text="DataType" VerticalAlignment="Center" Margin="0,0,5,0" Width="75"/>
+                        <TextBox Text="{Binding DataType}" Margin="0,0,50,0" Width="75"/>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+
+                <HierarchicalDataTemplate DataType="{x:Type models:DataID}"  ItemsSource="{Binding FieldsList}">
+                    <StackPanel Orientation="Horizontal" Margin="0,1">
+                        <TextBlock Text="DataID" VerticalAlignment="Center" Margin="0,0,20,0" Width="55" FontWeight="DemiBold"/>
+
+                        <TextBlock Text="Name" VerticalAlignment="Center" Margin="0,0,5,0" Width="45"/>
+                        <TextBox Text="{Binding Name}" Margin="0,0,50,0" Width="200"/>
+
+                        <TextBlock Text="ID" VerticalAlignment="Center" Margin="0,0,5,0" Width="25"/>
+                        <TextBox Text="{Binding ID}" Margin="0,0,50,0" Width="75"/>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+
+                <HierarchicalDataTemplate DataType="{x:Type models:Field}"  >
+                    <StackPanel Orientation="Horizontal" Margin="0,1">
+                        <TextBlock Text="Field" VerticalAlignment="Center" Margin="0,0,20,0" Width="55" FontWeight="DemiBold"/>
+
+                        <TextBlock Text="Name" VerticalAlignment="Center" Margin="0,0,5,0" Width="45"/>
+                        <TextBox Text="{Binding Name}" Margin="0,0,50,0" Width="200"/>
+
+                        <TextBlock Text="DataType" VerticalAlignment="Center" Margin="0,0,5,0" Width="75"/>
+                        <TextBox Text="{Binding DataType}" Margin="0,0,50,0" Width="75"/>
+
+                        <TextBlock Text="PyDataType" VerticalAlignment="Center" Margin="0,0,5,0" Width="75"/>
+                        <TextBox Text="{Binding PyDataType}" Margin="0,0,50,0" Width="75"/>
+
+                        <TextBlock Text="DefVal" VerticalAlignment="Center" Margin="0,0,5,0" Width="45"/>
+                        <TextBox Text="{Binding DefVal}" Margin="0,0,50,0" Width="75"/>
+
+                        <TextBlock Text="MinVal" VerticalAlignment="Center" Margin="0,0,5,0" Width="45"/>
+                        <TextBox Text="{Binding MinVal}" Margin="0,0,50,0" Width="75"/>
+
+                        <TextBlock Text="MaxVal" VerticalAlignment="Center" Margin="0,0,5,0" Width="45"/>
+                        <TextBox Text="{Binding MaxVal}" Margin="0,0,50,0" Width="75"/>
+
+                        <TextBlock Text="Unit" VerticalAlignment="Center" Margin="0,0,5,0" Width="35"/>
+                        <TextBox Text="{Binding Unit}" Margin="0,0,50,0" Width="75"/>
+
+                        <TextBlock Text="Offset" VerticalAlignment="Center" Margin="0,0,5,0" Width="45"/>
+                        <TextBox Text="{Binding Offset}" Margin="0,0,50,0" Width="75"/>
+
+                        <TextBlock Text="Res" VerticalAlignment="Center" Margin="0,0,5,0" Width="35"/>
+                        <TextBox Text="{Binding Res}" Margin="0,0,50,0" Width="75"/>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+
             </TreeView.Resources>
 
-        </TreeView>-->
+        </TreeView>
         
     </Grid>
 </UserControl>

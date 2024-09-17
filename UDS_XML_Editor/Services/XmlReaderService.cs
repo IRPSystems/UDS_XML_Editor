@@ -35,6 +35,16 @@ namespace UDS_XML_Editor.Services
 				xmlData,
 				root);
 
+			HandleServicesElement(
+				xmlData,
+				root,
+				"Requests");
+
+			HandleServicesElement(
+				xmlData,
+				root,
+				"Responses");
+
 			return xmlData;
 		}
 
@@ -172,26 +182,42 @@ namespace UDS_XML_Editor.Services
 			if (nodeService.ChildNodes.Count == 0)
 				return;
 
+			NamedSection subFuncs = new NamedSection() { Name = "SubFuncs", Items = new ObservableCollection<object>() };
+			NamedSection fields = new NamedSection() { Name = "Fields", Items = new ObservableCollection<object>() };
+			NamedSection dataIDs = new NamedSection() { Name = "DataIDs", Items = new ObservableCollection<object>() };
+			
+
 			foreach (XmlNode node in nodeService.ChildNodes)
 			{
 				switch (node.Name)
 				{
 					case "SubFunc":
-						GetServiceAttributes(
+						GetSubFunc(
 							node,
-							service);
+							subFuncs);
 						break;
 
 					case "Field":
 						Field field = GetField(node);
-						service.FieldsList.Add(field);
+						fields.Items.Add(field);
 						break;
 
 					case "DataID":
-						
+						GetDataID(
+							node,
+							dataIDs);
 						break;
 				}
 			}
+
+			service.Sections = new ObservableCollection<NamedSection>();
+
+			if (subFuncs.Items.Count > 0) 
+				service.Sections.Add(subFuncs);
+			if (fields.Items.Count > 0)
+				service.Sections.Add(fields);
+			if (dataIDs.Items.Count > 0)
+				service.Sections.Add(dataIDs);
 		}
 
 		private void GetServiceAttributes(
@@ -224,15 +250,16 @@ namespace UDS_XML_Editor.Services
 
 		private void GetSubFunc(
 			XmlNode nodeSubFunc,
-			Service service)
+			NamedSection namedSection)
 		{
 			SubFunc subFunc = new SubFunc();
+			namedSection.Items.Add(subFunc);
 
 			GetSubFuncAttributes(
 				nodeSubFunc,
 				subFunc);
 
-			subFunc.FieldsList = service.FieldsList;
+			subFunc.FieldsList = new ObservableCollection<Field>();
 			foreach (XmlNode node in nodeSubFunc.ChildNodes)
 			{
 				switch (node.Name)
@@ -278,15 +305,16 @@ namespace UDS_XML_Editor.Services
 
 		private void GetDataID(
 			XmlNode nodeDataID,
-			Service service)
+			NamedSection namedSection)
 		{
 			DataID dataID = new DataID();
+			namedSection.Items.Add(dataID);
 
 			GetDataIDAttributes(
 				nodeDataID,
 				dataID);
 
-			dataID.FieldsList = service.FieldsList;
+			dataID.FieldsList = new ObservableCollection<Field>();
 			foreach (XmlNode node in nodeDataID.ChildNodes)
 			{
 				switch (node.Name)

@@ -43,7 +43,6 @@ namespace UDS_XML_Editor.ViewModels
 
 			MainElementView customersListView = new MainElementView() { DataContext = customersList };
 			CreateTabbedWindow(customersListView, "Customers", string.Empty, out _appCustormers);
-			SetDesiredWidthInDockedMode(_appCustormers, 1200);
 
 			MainElementView requestsListView = new MainElementView() { DataContext = requestsList };
 			CreateTabbedWindow(requestsListView, "Requests", "Customers", out _appRequests);

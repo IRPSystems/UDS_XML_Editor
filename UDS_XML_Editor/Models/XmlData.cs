@@ -42,9 +42,13 @@ namespace UDS_XML_Editor.Models
 		public int ID { get; set; }
 		public string DataType { get; set; }
 
-		public ObservableCollection<SubFunc> SubFuncsList { get; set; }
-		public ObservableCollection<Field> FieldsList { get; set; }
-		public ObservableCollection<DataID> DataIDsList { get; set; }
+		public ObservableCollection<NamedSection> Sections { get; set; }
+	}
+
+	public class NamedSection
+	{
+		public string Name { get; set; }
+		public ObservableCollection<object> Items { get; set; }
 	}
 
 	public class SubFunc
