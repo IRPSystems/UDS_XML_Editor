@@ -1,0 +1,77 @@
+﻿<mah:MetroWindow x:Class="UDS_XML_Editor.UDS_XML_EditorMainWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" 
+                 xmlns:local="clr-namespace:UDS_XML_Editor"
+                 mc:Ignorable="d"
+                 Title="UDS XML Editor" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Margin="5,1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="75"/>
+                    <ColumnDefinition Width="5"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" 
+                           Text="UDS XML Path" 
+                           VerticalAlignment="Center" 
+                           TextTrimming="CharacterEllipsis"
+                           FontSize="14"/>
+
+                <TextBox Grid.Column="2" 
+                         Text="{Binding Path}" />
+
+                <Button Grid.Column="4" 
+                        Content="..."
+                        Command="{Binding BrowseFilePathCommand}"/>
+
+                <Button Grid.Column="6" 
+                        Content="Load File"
+                        Command="{Binding LoadFileCommand}"/>
+
+            </Grid>
+
+
+        </Grid>
+
+
+        <Border Grid.Row="1" Background="{DynamicResource MahApps.Brushes.Accent}">
+            <StackPanel Orientation="Horizontal">
+
+                <TextBlock Text="Version: " 
+                           FontSize="16"
+                           FontWeight="DemiBold" 
+                           Foreground="White" 
+                           VerticalAlignment="Center"
+                           Margin="5,0,5,0"/>
+
+                <TextBlock Text="{Binding Version}" 
+                           FontSize="16"
+                           FontWeight="DemiBold" 
+                           Foreground="White" 
+                           VerticalAlignment="Center"
+                           Margin="5,0,0,0"/>
+
+            </StackPanel>
+        </Border>
+        
+    </Grid>
+</mah:MetroWindow>
