@@ -7,7 +7,8 @@
                  xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" 
                  xmlns:local="clr-namespace:UDS_XML_Editor"
                  mc:Ignorable="d"
-                 Title="UDS XML Editor" Height="450" Width="800">
+                 Title="UDS XML Editor" Height="450" Width="800"
+                 WindowState="Maximized">
 
     <i:Interaction.Triggers>
 
@@ -47,26 +48,25 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0" 
-                           Text="UDS XML Path" 
-                           VerticalAlignment="Center" 
-                           TextTrimming="CharacterEllipsis"
-                           FontSize="14"/>
+                       Text="UDS XML Path" 
+                       VerticalAlignment="Center" 
+                       TextTrimming="CharacterEllipsis"
+                       FontSize="14"/>
 
             <TextBox Grid.Column="2" 
-                         Text="{Binding Path}" />
+                     Text="{Binding Path}" />
 
             <Button Grid.Column="4" 
-                        Content="..."
-                        Command="{Binding BrowseFilePathCommand}"/>
+                    Content="..."
+                    Command="{Binding BrowseFilePathCommand}"/>
 
             <Button Grid.Column="6" 
-                        Content="Load File"
-                        Command="{Binding LoadFileCommand}"/>
+                    Content="Load File"
+                    Command="{Binding LoadFileCommand}"/>
 
         </Grid>
 
         <ContentControl Grid.Row="1" Content="{Binding Docking}" Margin="5"/>
-
 
         <Border Grid.Row="2" Background="{DynamicResource MahApps.Brushes.Accent}">
             <StackPanel Orientation="Horizontal">

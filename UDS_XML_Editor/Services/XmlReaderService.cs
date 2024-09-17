@@ -13,10 +13,10 @@ namespace UDS_XML_Editor.Services
 		public XmlData ReadXml(string path)
 		{
 			if (string.IsNullOrWhiteSpace(path))
-				return;
+				return null;
 
 			if (File.Exists(path) == false)
-				return;
+				return null;
 
 			string fileData = File.ReadAllText(path);
 

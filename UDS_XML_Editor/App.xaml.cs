@@ -1,8 +1,6 @@
 ﻿using Controls.Views;
 using ControlzEx.Theming;
 using Services.Services;
-using System.Configuration;
-using System.Data;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -13,6 +11,16 @@ namespace UDS_XML_Editor
 	/// </summary>
 	public partial class App : Application
 	{
+		public App()
+		{
+			Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(
+				 "MzM3MDg2M0AzMjM0MmUzMDJlMzBCT2dsKzBPUW9HbXFrM1J3aWxQR2k5UDVOZXNDdE4zdGJCSjI5N2lpWGlJPQ==");
+
+			this.DispatcherUnhandledException += App_DispatcherUnhandledException;
+
+
+		}
+
 		protected override void OnStartup(StartupEventArgs e)
 		{
 			System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);

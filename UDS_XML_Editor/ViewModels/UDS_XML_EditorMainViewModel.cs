@@ -22,7 +22,7 @@ namespace UDS_XML_Editor.ViewModels
 		public string Path { get; set; }
 
 		public XmlData XmlData { get; set; }
-		public DocingViewModel Docing { get; set; }
+		public DocingViewModel Docking { get; set; }
 
 		#endregion Properties
 
@@ -30,6 +30,7 @@ namespace UDS_XML_Editor.ViewModels
 
 		private UDS_XML_EditorSettings _uds_XML_EditorSettings;
 		private XmlReaderService _xmlReader;
+
 
 		#endregion Fields
 
@@ -47,7 +48,7 @@ namespace UDS_XML_Editor.ViewModels
 
 			_xmlReader = new XmlReaderService();
 
-			Docing = new DocingViewModel();
+			Docking = new DocingViewModel();
 		}
 
 		#endregion Constructor
@@ -60,7 +61,8 @@ namespace UDS_XML_Editor.ViewModels
 				"UDS_XML_Editor",
 				_uds_XML_EditorSettings);
 
-			Docing.Close();
+			if(Docking != null)
+				Docking.Close();
 		}
 
 		private void BrowseFilePath()
@@ -84,6 +86,12 @@ namespace UDS_XML_Editor.ViewModels
 		private void LoadFile()
 		{
 			XmlData = _xmlReader.ReadXml(Path);
+
+			Docking.CreateWindows(
+				XmlData.System,
+				XmlData.CustomersList,
+				XmlData.RequestsList,
+				XmlData.ResponsesList);
 		}
 
 		#endregion Methods
