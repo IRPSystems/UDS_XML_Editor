@@ -5,10 +5,19 @@
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
                  xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" 
+                 xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"    
                  xmlns:local="clr-namespace:UDS_XML_Editor"
                  mc:Ignorable="d"
                  Title="UDS XML Editor" Height="450" Width="800"
                  WindowState="Maximized">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Controls;component/Resources/ButtonWithIcon.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
 
     <i:Interaction.Triggers>
 
@@ -30,7 +39,7 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
             <RowDefinition />
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
@@ -39,30 +48,28 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="75"/>
-                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            
+            <Button Style="{StaticResource ButtonWithIconStyle}"
+                    Grid.Column="0"
+                    ToolTip="Load an XML file"
+                    Command="{Binding LoadFileCommand}"
+                    Height="45" Width="45">
+                <iconPacks:PackIconMaterial Kind="FolderOpen" Height="25" Width="25"/>
+            </Button>
 
-            <TextBlock Grid.Column="0" 
-                       Text="UDS XML Path" 
-                       VerticalAlignment="Center" 
-                       TextTrimming="CharacterEllipsis"
-                       FontSize="14"/>
+            <Button Style="{StaticResource ButtonWithIconStyle}"
+                    Grid.Column="2"
+                    ToolTip="Save an XML file"
+                    Command="{Binding SaveFileCommand}"
+                    Height="45" Width="45">
+                <iconPacks:PackIconMaterial Kind="ContentSave" Height="25" Width="25"/>
+            </Button>
 
-            <TextBox Grid.Column="2" 
-                     Text="{Binding Path}" />
-
-            <Button Grid.Column="4" 
-                    Content="..."
-                    Command="{Binding BrowseFilePathCommand}"/>
-
-            <Button Grid.Column="6" 
-                    Content="Load File"
-                    Command="{Binding LoadFileCommand}"/>
+            <TextBlock Grid.Column="4" Text="{Binding Path}" VerticalAlignment="Center" FontSize="15" />
 
         </Grid>
 

@@ -40,8 +40,8 @@ namespace UDS_XML_Editor.ViewModels
 		{
 			Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-			BrowseFilePathCommand = new RelayCommand(BrowseFilePath);
 			LoadFileCommand = new RelayCommand(LoadFile);
+			SaveFileCommand = new RelayCommand(SaveFile);
 			ClosingCommand = new RelayCommand<CancelEventArgs>(Closing);
 
 			_uds_XML_EditorSettings = UDS_XML_EditorSettings.LoadUDS_XML_EditorUserData("UDS_XML_Editor");
@@ -85,6 +85,8 @@ namespace UDS_XML_Editor.ViewModels
 
 		private void LoadFile()
 		{
+			BrowseFilePath();
+
 			XmlData = _xmlReader.ReadXml(Path);
 
 			Docking.CreateWindows(
@@ -94,12 +96,17 @@ namespace UDS_XML_Editor.ViewModels
 				XmlData.ResponsesList);
 		}
 
+		private void SaveFile()
+		{
+
+		}
+
 		#endregion Methods
 
 		#region Commands
 
-		public RelayCommand BrowseFilePathCommand { get; private set; }
 		public RelayCommand LoadFileCommand { get; private set; }
+		public RelayCommand SaveFileCommand { get; private set; }
 
 		public RelayCommand<CancelEventArgs> ClosingCommand { get; private set; }
 
