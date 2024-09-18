@@ -28,10 +28,10 @@ namespace UDS_XML_Editor.Models
 	public class Customer : BaseXmlSection
 	{
 		public string Name { get; set; }
-		public int Rate { get; set; }
-		public int TxID { get; set; }
-		public int RxID { get; set; }
-		public int BCID { get; set; }
+		public string Rate { get; set; }
+		public string TxID { get; set; }
+		public string RxID { get; set; }
+		public string BCID { get; set; }
 
 		public ObservableCollection<BaseXmlSection> FWStepsList { get; set; }
 	}
@@ -44,7 +44,7 @@ namespace UDS_XML_Editor.Models
 	public class Service: BaseXmlSection
 	{
 		public string Name { get; set; }
-		public int ID { get; set; }
+		public string ID { get; set; }
 		public string DataType { get; set; }
 
 		public ObservableCollection<BaseXmlSection> Sections { get; set; }
@@ -59,7 +59,7 @@ namespace UDS_XML_Editor.Models
 	public class SubFunc: BaseXmlSection
 	{
 		public string Name { get; set; }
-		public int ID { get; set; }
+		public string ID { get; set; }
 		public string DataType { get; set; }
 
 		public ObservableCollection<BaseXmlSection> FieldsList { get; set; }
@@ -70,18 +70,18 @@ namespace UDS_XML_Editor.Models
 		public string Name { get; set; }
 		public string DataType { get; set; }
 		public string PyDataType { get; set; }
-		public double DefVal { get; set; }
-		public double MinVal { get; set; }
-		public double MaxVal { get; set; }
+		public string DefVal { get; set; }
+		public string MinVal { get; set; }
+		public string MaxVal { get; set; }
 		public string Unit { get; set; }
-		public double Offset { get; set; }
-		public double Res { get; set; }
+		public string Offset { get; set; }
+		public string Res { get; set; }
 	}
 
 	public class DataID: BaseXmlSection
 	{
 		public string Name { get; set; }
-		public int ID { get; set; }
+		public string ID { get; set; }
 
 		public ObservableCollection<BaseXmlSection> FieldsList { get; set; }
 	}

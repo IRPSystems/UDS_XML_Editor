@@ -91,24 +91,16 @@ namespace UDS_XML_Editor.Services
 							customer.Name = attribute.Value;
 							break;
 						case "Rate":
-							int rate;
-							int.TryParse(attribute.Value, out rate);
-							customer.Rate = rate;
+							customer.Rate = attribute.Value;
 							break;
 						case "TxID":
-							int txID;
-							int.TryParse(attribute.Value, out txID);
-							customer.TxID = txID;
+							customer.TxID = attribute.Value;
 							break;
 						case "RxID":
-							int rxID;
-							int.TryParse(attribute.Value, out rxID);
-							customer.RxID = rxID;
+							customer.RxID = attribute.Value;
 							break;
 						case "BCID":
-							int bcID;
-							int.TryParse(attribute.Value, out bcID);
-							customer.BCID = bcID;
+							customer.BCID = attribute.Value;
 							break;
 					}
 				}
@@ -235,9 +227,7 @@ namespace UDS_XML_Editor.Services
 						service.Name = attribute.Value;
 						break;
 					case "ID":
-						int id;
-						int.TryParse(attribute.Value, out id);
-						service.ID = id;
+						service.ID = attribute.Value;
 						break;
 					case "DataType":
 						service.DataType = attribute.Value;
@@ -288,9 +278,7 @@ namespace UDS_XML_Editor.Services
 						subFunc.Name = attribute.Value;
 						break;
 					case "ID":
-						int id;
-						int.TryParse(attribute.Value, out id);
-						subFunc.ID = id;
+						subFunc.ID = attribute.Value;
 						break;
 					case "DataType":
 						subFunc.DataType = attribute.Value;
@@ -343,9 +331,7 @@ namespace UDS_XML_Editor.Services
 						dataID.Name = attribute.Value;
 						break;
 					case "ID":
-						int id;
-						int.TryParse(attribute.Value, out id);
-						dataID.ID = id;
+						dataID.ID = attribute.Value;
 						break;
 				}
 			}
@@ -374,32 +360,22 @@ namespace UDS_XML_Editor.Services
 						field.PyDataType = attribute.Value;
 						break;
 					case "DefVal":
-						double defVal;
-						double.TryParse(attribute.Value, out defVal);
-						field.DefVal = defVal;
+						field.DefVal = attribute.Value;
 						break;
 					case "MinVal":
-						double minVal;
-						double.TryParse(attribute.Value, out minVal);
-						field.MinVal = minVal;
+						field.MinVal = attribute.Value;
 						break;
 					case "MaxVal":
-						double maxVal;
-						double.TryParse(attribute.Value, out maxVal);
-						field.MaxVal = maxVal;
+						field.MaxVal = attribute.Value;
 						break;
 					case "Unit":
 						field.Unit = attribute.Value;
 						break;
 					case "Offset":
-						double offset;
-						double.TryParse(attribute.Value, out offset);
-						field.Offset = offset;
+						field.Offset = attribute.Value;
 						break;
 					case "Res":
-						double res;
-						double.TryParse(attribute.Value, out res);
-						field.Res = res;
+						field.Res = attribute.Value;
 						break;
 				}
 			}
