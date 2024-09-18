@@ -26,6 +26,7 @@ namespace UDS_XML_Editor.ViewModels
 
 		private UDS_XML_EditorSettings _uds_XML_EditorSettings;
 		private XmlReaderService _xmlReader;
+		private XmlWriterService _xmlWriter;
 
 
 		#endregion Fields
@@ -43,6 +44,7 @@ namespace UDS_XML_Editor.ViewModels
 			_uds_XML_EditorSettings = UDS_XML_EditorSettings.LoadUDS_XML_EditorUserData("UDS_XML_Editor");
 
 			_xmlReader = new XmlReaderService();
+			_xmlWriter = new XmlWriterService();
 
 			Docking = new DocingViewModel();
 		}
@@ -61,27 +63,21 @@ namespace UDS_XML_Editor.ViewModels
 				Docking.Close();
 		}
 
-		private void BrowseFilePath()
+		private void LoadFile()
 		{
-			
 			OpenFileDialog openFileDialog = new OpenFileDialog();
-			if (string.IsNullOrEmpty(_uds_XML_EditorSettings.XMLDir) &&
-				Directory.Exists(_uds_XML_EditorSettings.XMLDir))
+			if (string.IsNullOrEmpty(_uds_XML_EditorSettings.LoadXmlDir) &&
+				Directory.Exists(_uds_XML_EditorSettings.LoadXmlDir))
 			{
-				openFileDialog.InitialDirectory = _uds_XML_EditorSettings.XMLDir;
+				openFileDialog.InitialDirectory = _uds_XML_EditorSettings.LoadXmlDir;
 			}
-			
+
 			bool? result = openFileDialog.ShowDialog();
 			if (result != true)
 				return;
 
 			Path = openFileDialog.FileName;
-			_uds_XML_EditorSettings.XMLDir = System.IO.Path.GetDirectoryName(Path);
-		}
-
-		private void LoadFile()
-		{
-			BrowseFilePath();
+			_uds_XML_EditorSettings.LoadXmlDir = System.IO.Path.GetDirectoryName(Path);
 
 			XmlData = _xmlReader.ReadXml(Path);
 
@@ -94,7 +90,20 @@ namespace UDS_XML_Editor.ViewModels
 
 		private void SaveFile()
 		{
+			SaveFileDialog saveFileDialog = new SaveFileDialog();
+			if (string.IsNullOrEmpty(_uds_XML_EditorSettings.SaveXmlDir) &&
+				Directory.Exists(_uds_XML_EditorSettings.SaveXmlDir))
+			{
+				saveFileDialog.InitialDirectory = _uds_XML_EditorSettings.LoadXmlDir;
+			}
 
+			bool? result = saveFileDialog.ShowDialog();
+			if (result != true)
+				return;
+
+			_uds_XML_EditorSettings.LoadXmlDir = System.IO.Path.GetDirectoryName(saveFileDialog.FileName);
+
+			_xmlWriter.WriteXml(saveFileDialog.FileName, XmlData);
 		}
 
 		#endregion Methods

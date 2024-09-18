@@ -7,7 +7,9 @@ namespace UDS_XML_Editor.Models
 	public class UDS_XML_EditorSettings
 	{
 		public bool IsLightTheme { get; set; }
-		public string XMLDir { get; set; }
+		public string LoadXmlDir { get; set; }
+		public string SaveXmlDir { get; set; }
+
 
 		public UDS_XML_EditorSettings()
 		{
