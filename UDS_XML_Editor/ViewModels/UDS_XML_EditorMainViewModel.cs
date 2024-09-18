@@ -91,9 +91,9 @@ namespace UDS_XML_Editor.ViewModels
 
 			Docking.CreateWindows(
 				XmlData.System,
-				XmlData.CustomersList,
-				XmlData.RequestsList,
-				XmlData.ResponsesList);
+				new MainElementViewModel() { DataContext = XmlData.CustomersList },
+				new MainElementViewModel() { DataContext = XmlData.RequestsList },
+				new MainElementViewModel() { DataContext = XmlData.ResponsesList });
 		}
 
 		private void SaveFile()

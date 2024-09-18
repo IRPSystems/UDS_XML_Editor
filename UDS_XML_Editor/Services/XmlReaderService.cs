@@ -76,7 +76,7 @@ namespace UDS_XML_Editor.Services
 			if (nodesList.Count == 0)
 				return;
 
-			xmlData.CustomersList = new ObservableCollection<Customer>();
+			xmlData.CustomersList = new ObservableCollection<BaseXmlSection>();
 			foreach (XmlNode node in nodesList)
 			{
 				Customer customer = new Customer();
@@ -113,7 +113,7 @@ namespace UDS_XML_Editor.Services
 					}
 				}
 
-				customer.FWStepsList = new ObservableCollection<FWStep>();
+				customer.FWStepsList = new ObservableCollection<BaseXmlSection>();
 				foreach (XmlNode customerNode in node.ChildNodes)
 				{
 					if (customerNode.Name != "FWStep")
@@ -150,7 +150,7 @@ namespace UDS_XML_Editor.Services
 			if (nodesList.Count == 0)
 				return;
 
-			ObservableCollection<Service> servicesList = new ObservableCollection<Service>();
+			ObservableCollection<BaseXmlSection> servicesList = new ObservableCollection<BaseXmlSection>();
 
 			foreach (XmlNode node in nodesList)
 			{
@@ -169,7 +169,7 @@ namespace UDS_XML_Editor.Services
 		}
 
 		private void GetService(
-			ObservableCollection<Service> servicesList,
+			ObservableCollection<BaseXmlSection> servicesList,
 			XmlNode nodeService)
 		{
 			Service service = new Service();
@@ -182,9 +182,9 @@ namespace UDS_XML_Editor.Services
 			if (nodeService.ChildNodes.Count == 0)
 				return;
 
-			NamedSection subFuncs = new NamedSection() { Name = "SubFuncs", Items = new ObservableCollection<object>() };
-			NamedSection fields = new NamedSection() { Name = "Fields", Items = new ObservableCollection<object>() };
-			NamedSection dataIDs = new NamedSection() { Name = "DataIDs", Items = new ObservableCollection<object>() };
+			NamedSection subFuncs = new NamedSection() { Name = "SubFuncs", Items = new ObservableCollection<BaseXmlSection>() };
+			NamedSection fields = new NamedSection() { Name = "Fields", Items = new ObservableCollection<BaseXmlSection>() };
+			NamedSection dataIDs = new NamedSection() { Name = "DataIDs", Items = new ObservableCollection<BaseXmlSection>() };
 			
 
 			foreach (XmlNode node in nodeService.ChildNodes)
@@ -210,7 +210,7 @@ namespace UDS_XML_Editor.Services
 				}
 			}
 
-			service.Sections = new ObservableCollection<NamedSection>();
+			service.Sections = new ObservableCollection<BaseXmlSection>();
 
 			if (subFuncs.Items.Count > 0) 
 				service.Sections.Add(subFuncs);
@@ -259,7 +259,7 @@ namespace UDS_XML_Editor.Services
 				nodeSubFunc,
 				subFunc);
 
-			subFunc.FieldsList = new ObservableCollection<Field>();
+			subFunc.FieldsList = new ObservableCollection<BaseXmlSection>();
 			foreach (XmlNode node in nodeSubFunc.ChildNodes)
 			{
 				switch (node.Name)
@@ -314,7 +314,7 @@ namespace UDS_XML_Editor.Services
 				nodeDataID,
 				dataID);
 
-			dataID.FieldsList = new ObservableCollection<Field>();
+			dataID.FieldsList = new ObservableCollection<BaseXmlSection>();
 			foreach (XmlNode node in nodeDataID.ChildNodes)
 			{
 				switch (node.Name)

@@ -14,7 +14,7 @@ namespace UDS_XML_Editor.ViewModels
 	{
 		#region Fields
 
-		private ContentControl _appSystem;
+		//private ContentControl _appSystem;
 		private ContentControl _appCustormers;
 		private ContentControl _appRequests;
 		private ContentControl _appResponses;
@@ -35,9 +35,9 @@ namespace UDS_XML_Editor.ViewModels
 
 		public void CreateWindows(
 			Models.System system,
-			ObservableCollection<Customer> customersList,
-			ObservableCollection<Service> requestsList,
-			ObservableCollection<Service> responsesList)
+			MainElementViewModel customersList,
+			MainElementViewModel requestsList,
+			MainElementViewModel responsesList)
 		{
 			Children.Clear();
 

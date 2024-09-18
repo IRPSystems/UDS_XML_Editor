@@ -4,23 +4,28 @@ using System.Collections.ObjectModel;
 
 namespace UDS_XML_Editor.Models
 {
-	public class XmlData: ObservableObject
+	public abstract class BaseXmlSection: ObservableObject
+	{
+		public bool IsExpanded { get; set; }
+	}
+
+	public class XmlData: BaseXmlSection
 	{
 		public System System { get; set; }
 
-		public ObservableCollection<Customer> CustomersList { get; set; }
+		public ObservableCollection<BaseXmlSection> CustomersList { get; set; }
 
-		public ObservableCollection<Service> RequestsList { get; set; }
+		public ObservableCollection<BaseXmlSection> RequestsList { get; set; }
 
-		public ObservableCollection<Service> ResponsesList { get; set; }
+		public ObservableCollection<BaseXmlSection> ResponsesList { get; set; }
 	}
 
-	public class System
+	public class System: BaseXmlSection
 	{
 		public string LogDir { get; set; }
 	}
 
-	public class Customer : ObservableObject
+	public class Customer : BaseXmlSection
 	{
 		public string Name { get; set; }
 		public int Rate { get; set; }
@@ -28,39 +33,39 @@ namespace UDS_XML_Editor.Models
 		public int RxID { get; set; }
 		public int BCID { get; set; }
 
-		public ObservableCollection<FWStep> FWStepsList { get; set; }
+		public ObservableCollection<BaseXmlSection> FWStepsList { get; set; }
 	}
 
-	public class FWStep
+	public class FWStep: BaseXmlSection
 	{
 		public string Name { get; set; }
 	}
 
-	public class Service
-	{
-		public string Name { get; set; }
-		public int ID { get; set; }
-		public string DataType { get; set; }
-
-		public ObservableCollection<NamedSection> Sections { get; set; }
-	}
-
-	public class NamedSection
-	{
-		public string Name { get; set; }
-		public ObservableCollection<object> Items { get; set; }
-	}
-
-	public class SubFunc
+	public class Service: BaseXmlSection
 	{
 		public string Name { get; set; }
 		public int ID { get; set; }
 		public string DataType { get; set; }
 
-		public ObservableCollection<Field> FieldsList { get; set; }
+		public ObservableCollection<BaseXmlSection> Sections { get; set; }
 	}
 
-	public class Field
+	public class NamedSection: BaseXmlSection
+	{
+		public string Name { get; set; }
+		public ObservableCollection<BaseXmlSection> Items { get; set; }
+	}
+
+	public class SubFunc: BaseXmlSection
+	{
+		public string Name { get; set; }
+		public int ID { get; set; }
+		public string DataType { get; set; }
+
+		public ObservableCollection<BaseXmlSection> FieldsList { get; set; }
+	}
+
+	public class Field: BaseXmlSection
 	{
 		public string Name { get; set; }
 		public string DataType { get; set; }
@@ -73,11 +78,11 @@ namespace UDS_XML_Editor.Models
 		public double Res { get; set; }
 	}
 
-	public class DataID
+	public class DataID: BaseXmlSection
 	{
 		public string Name { get; set; }
 		public int ID { get; set; }
 
-		public ObservableCollection<Field> FieldsList { get; set; }
+		public ObservableCollection<BaseXmlSection> FieldsList { get; set; }
 	}
 }
