@@ -62,7 +62,8 @@ namespace UDS_XML_Editor.Models
 		public string ID { get; set; }
 		public string DataType { get; set; }
 
-		public ObservableCollection<BaseXmlSection> FieldsList { get; set; }
+		//public ObservableCollection<BaseXmlSection> FieldsList { get; set; }
+		public ObservableCollection<BaseXmlSection> Sections { get; set; }
 	}
 
 	public class Field: BaseXmlSection

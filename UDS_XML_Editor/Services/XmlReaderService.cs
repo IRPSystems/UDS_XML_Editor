@@ -249,17 +249,42 @@ namespace UDS_XML_Editor.Services
 				nodeSubFunc,
 				subFunc);
 
-			subFunc.FieldsList = new ObservableCollection<BaseXmlSection>();
+			NamedSection subFuncs = new NamedSection() { Name = "SubFuncs", Items = new ObservableCollection<BaseXmlSection>() };
+			NamedSection fields = new NamedSection() { Name = "Fields", Items = new ObservableCollection<BaseXmlSection>() };
+			NamedSection dataIDs = new NamedSection() { Name = "DataIDs", Items = new ObservableCollection<BaseXmlSection>() };
+
+
 			foreach (XmlNode node in nodeSubFunc.ChildNodes)
 			{
 				switch (node.Name)
 				{
+					case "SubFunc":
+						GetSubFunc(
+							node,
+							subFuncs);
+						break;
+
 					case "Field":
 						Field field = GetField(node);
-						subFunc.FieldsList.Add(field);
+						fields.Items.Add(field);
+						break;
+
+					case "DataID":
+						GetDataID(
+							node,
+							dataIDs);
 						break;
 				}
 			}
+
+			subFunc.Sections = new ObservableCollection<BaseXmlSection>();
+
+			if (subFuncs.Items.Count > 0)
+				subFunc.Sections.Add(subFuncs);
+			if (fields.Items.Count > 0)
+				subFunc.Sections.Add(fields);
+			if (dataIDs.Items.Count > 0)
+				subFunc.Sections.Add(dataIDs);
 
 		}
 

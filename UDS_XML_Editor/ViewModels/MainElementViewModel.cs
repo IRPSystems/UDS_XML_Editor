@@ -40,9 +40,9 @@ namespace UDS_XML_Editor.ViewModels
 				{
 					ExpandAll(namedSection.Items);
 				}
-				else if (section is SubFunc subFunc && subFunc.FieldsList != null && subFunc.FieldsList.Count > 0)
+				else if (section is SubFunc subFunc && subFunc.Sections != null && subFunc.Sections.Count > 0)
 				{
-					ExpandAll(subFunc.FieldsList);
+					ExpandAll(subFunc.Sections);
 				}
 				else if (section is DataID dataID && dataID.FieldsList != null && dataID.FieldsList.Count > 0)
 				{
@@ -76,9 +76,9 @@ namespace UDS_XML_Editor.ViewModels
 				{
 					CollapseAll(namedSection.Items);
 				}
-				else if (section is SubFunc subFunc && subFunc.FieldsList != null && subFunc.FieldsList.Count > 0)
+				else if (section is SubFunc subFunc && subFunc.Sections != null && subFunc.Sections.Count > 0)
 				{
-					CollapseAll(subFunc.FieldsList);
+					CollapseAll(subFunc.Sections);
 				}
 				else if (section is DataID dataID && dataID.FieldsList != null && dataID.FieldsList.Count > 0)
 				{

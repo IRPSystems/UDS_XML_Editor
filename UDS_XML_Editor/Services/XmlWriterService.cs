@@ -25,6 +25,10 @@ namespace UDS_XML_Editor.Services
 			WriteServices(xmlData.RequestsList, writer);
 			writer.WriteEndElement();
 
+			writer.WriteStartElement("Responses");
+			WriteServices(xmlData.ResponsesList, writer);
+			writer.WriteEndElement();
+
 			writer.WriteEndElement();
 			writer.WriteEndDocument();
 			writer.Flush();
@@ -155,18 +159,18 @@ namespace UDS_XML_Editor.Services
 			if (string.IsNullOrEmpty(subFunc.DataType) == false)
 				writer.WriteAttributeString("DataType", subFunc.DataType);
 
-			if (subFunc.FieldsList == null || subFunc.FieldsList.Count == 0)
+			if (subFunc.Sections == null || subFunc.Sections.Count == 0)
 			{
 				writer.WriteEndElement();
 				return;
 			}
 
-			foreach (BaseXmlSection section in subFunc.FieldsList)
+			foreach (BaseXmlSection section in subFunc.Sections)
 			{
-				if (!(section is Field field))
+				if (!(section is NamedSection namedSection))
 					continue;
 
-				WriteField(field, writer);
+				WriteSingleNamedSection(namedSection, writer);
 			}
 
 
@@ -212,7 +216,7 @@ namespace UDS_XML_Editor.Services
 			DataID dataID,
 			XmlWriter writer)
 		{
-			writer.WriteStartElement("SubFunc");
+			writer.WriteStartElement("DataID");
 
 			writer.WriteAttributeString("Name", dataID.Name);
 
