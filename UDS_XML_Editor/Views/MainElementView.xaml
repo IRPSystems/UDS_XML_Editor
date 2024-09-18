@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"    
              xmlns:models="clr-namespace:UDS_XML_Editor.Models"
+             xmlns:converters="clr-namespace:UDS_XML_Editor.Converters"
              xmlns:local="clr-namespace:UDS_XML_Editor.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -14,6 +15,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Controls;component/Resources/ButtonWithIcon.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <converters:HideEmptyStringsConverter x:Key="HideEmptyStringsConverter"/>
+
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -82,8 +86,10 @@
                         <TextBlock Text="ID" VerticalAlignment="Center" Margin="0,0,5,0" Width="35"/>
                         <TextBox Text="{Binding ID}" Margin="0,0,50,0" Width="75"/>
 
-                        <TextBlock Text="DataType" VerticalAlignment="Center" Margin="0,0,5,0" Width="75"/>
-                        <TextBox Text="{Binding DataType}" Margin="0,0,50,0" Width="75"/>
+                        <TextBlock Text="DataType" VerticalAlignment="Center" Margin="0,0,5,0" Width="75"
+                                   Visibility="{Binding DataType, Converter={StaticResource HideEmptyStringsConverter}}"/>
+                        <TextBox Text="{Binding DataType}" Margin="0,0,50,0" Width="75"
+                                 Visibility="{Binding DataType, Converter={StaticResource HideEmptyStringsConverter}}"/>
                     </StackPanel>
                 </HierarchicalDataTemplate>
 
@@ -114,8 +120,10 @@
                         <TextBlock Text="ID" VerticalAlignment="Center" Margin="0,0,5,0" Width="25"/>
                         <TextBox Text="{Binding ID}" Margin="0,0,50,0" Width="75"/>
 
-                        <TextBlock Text="DataType" VerticalAlignment="Center" Margin="0,0,5,0" Width="75"/>
-                        <TextBox Text="{Binding DataType}" Margin="0,0,50,0" Width="75"/>
+                        <TextBlock Text="DataType" VerticalAlignment="Center" Margin="0,0,5,0" Width="75"
+                                   Visibility="{Binding DataType, Converter={StaticResource HideEmptyStringsConverter}}"/>
+                        <TextBox Text="{Binding DataType}" Margin="0,0,50,0" Width="75"
+                                 Visibility="{Binding DataType, Converter={StaticResource HideEmptyStringsConverter}}"/>
                     </StackPanel>
                 </HierarchicalDataTemplate>
 
@@ -138,11 +146,15 @@
                         <TextBlock Text="Name" VerticalAlignment="Center" Margin="0,0,5,0" Width="45"/>
                         <TextBox Text="{Binding Name}" Margin="0,0,50,0" Width="200"/>
 
-                        <TextBlock Text="DataType" VerticalAlignment="Center" Margin="0,0,5,0" Width="75"/>
-                        <TextBox Text="{Binding DataType}" Margin="0,0,50,0" Width="75"/>
+                        <TextBlock Text="DataType" VerticalAlignment="Center" Margin="0,0,5,0" Width="75"
+                                   Visibility="{Binding DataType, Converter={StaticResource HideEmptyStringsConverter}}"/>
+                        <TextBox Text="{Binding DataType}" Margin="0,0,50,0" Width="75"
+                                   Visibility="{Binding DataType, Converter={StaticResource HideEmptyStringsConverter}}"/>
 
-                        <TextBlock Text="PyDataType" VerticalAlignment="Center" Margin="0,0,5,0" Width="75"/>
-                        <TextBox Text="{Binding PyDataType}" Margin="0,0,50,0" Width="75"/>
+                        <TextBlock Text="PyDataType" VerticalAlignment="Center" Margin="0,0,5,0" Width="75"
+                                   Visibility="{Binding PyDataType, Converter={StaticResource HideEmptyStringsConverter}}"/>
+                        <TextBox Text="{Binding PyDataType}" Margin="0,0,50,0" Width="75"
+                                   Visibility="{Binding PyDataType, Converter={StaticResource HideEmptyStringsConverter}}"/>
 
                         <TextBlock Text="DefVal" VerticalAlignment="Center" Margin="0,0,5,0" Width="45"/>
                         <TextBox Text="{Binding DefVal}" Margin="0,0,50,0" Width="75"/>
@@ -153,8 +165,10 @@
                         <TextBlock Text="MaxVal" VerticalAlignment="Center" Margin="0,0,5,0" Width="45"/>
                         <TextBox Text="{Binding MaxVal}" Margin="0,0,50,0" Width="75"/>
 
-                        <TextBlock Text="Unit" VerticalAlignment="Center" Margin="0,0,5,0" Width="35"/>
-                        <TextBox Text="{Binding Unit}" Margin="0,0,50,0" Width="75"/>
+                        <TextBlock Text="Unit" VerticalAlignment="Center" Margin="0,0,5,0" Width="35"
+                                   Visibility="{Binding Unit, Converter={StaticResource HideEmptyStringsConverter}}"/>
+                        <TextBox Text="{Binding Unit}" Margin="0,0,50,0" Width="75"
+                                   Visibility="{Binding Unit, Converter={StaticResource HideEmptyStringsConverter}}"/>
 
                         <TextBlock Text="Offset" VerticalAlignment="Center" Margin="0,0,5,0" Width="45"/>
                         <TextBox Text="{Binding Offset}" Margin="0,0,50,0" Width="75"/>

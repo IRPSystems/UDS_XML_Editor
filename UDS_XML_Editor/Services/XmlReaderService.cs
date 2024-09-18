@@ -367,7 +367,7 @@ namespace UDS_XML_Editor.Services
 					case "Name":
 						field.Name = attribute.Value;
 						break;
-					case "DataTyp":
+					case "DataType":
 						field.DataType = attribute.Value;
 						break;
 					case "PyDataType":
