@@ -29,22 +29,52 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="1">
+        <StackPanel Grid.Row="0" Orientation="Horizontal" >
             <Button Grid.Column="2" Style="{StaticResource ButtonWithIconStyle}"
                     Height="35" Width="35"
                     ToolTip="Expand all"
                     Command="{Binding ExpandAllCommand}"
-                    Margin="0,0,5,0">
+                    Margin="0,1,5,1">
                 <iconPacks:PackIconMaterial Kind="ArrowExpandAll" Height="25" Width="25"/>
             </Button>
 
             <Button Grid.Column="4" Style="{StaticResource ButtonWithIconStyle}"
                     Height="35" Width="35"
                     ToolTip="Collapse all"
-                    Command="{Binding CollapseAllCommand}">
+                    Command="{Binding CollapseAllCommand}"
+                    Margin="0,1,5,1">
                 <iconPacks:PackIconMaterial Kind="ArrowCollapseAll" Height="25" Width="25"/>
             </Button>
+
+            <Line Y1="1" Stretch="Fill" Stroke="{DynamicResource MahApps.Brushes.Accent2}" Margin="0,0,50,0" />
+
+            <TextBlock Text="Search:" VerticalAlignment="Center" Margin="0,0,20,0" FontWeight="DemiBold" />
+
+            <TextBlock Text="Name" VerticalAlignment="Center" Margin="0,0,5,0" />
+            <TextBox Text="{Binding SearchName}" Margin="0,0,20,0" Width="200" VerticalAlignment="Center"/>
+
+            <TextBlock Text="ID" VerticalAlignment="Center" Margin="0,0,5,0" />
+            <TextBox Text="{Binding SearchID}" Margin="0,0,20,0" Width="75" VerticalAlignment="Center"/>
+
+            <Button Style="{StaticResource ButtonWithIconStyle}"
+                    Height="35" Width="35"
+                    ToolTip="Search"
+                    Command="{Binding SearchCommand}"
+                    Margin="0,1,5,1">
+                <iconPacks:PackIconMaterial Kind="Magnify" Height="25" Width="25"/>
+            </Button>
+
+            <Button Style="{StaticResource ButtonWithIconStyle}"
+                    Height="35" Width="35"
+                    ToolTip="Delete search"
+                    Command="{Binding DeleteSearchCommand}"
+                    Margin="0,1,5,1">
+                <iconPacks:PackIconOcticons Kind="X" Height="25" Width="25"/>
+            </Button>
+
         </StackPanel>
+
+        <Line Grid.Row="1" X1="1" Stretch="Fill" Stroke="{DynamicResource MahApps.Brushes.Accent2}" />
 
 
         <TreeView Grid.Row="2" ItemsSource="{Binding DataContext}" FontSize="14">
@@ -53,6 +83,7 @@
 
                 <Style TargetType="TreeViewItem">
                     <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
+                    <Setter Property="Visibility" Value="{Binding Visibility, Mode=TwoWay}"/>
                 </Style>
                 
                 <HierarchicalDataTemplate DataType="{x:Type models:Customer}" ItemsSource="{Binding FWStepsList}">
@@ -112,7 +143,7 @@
                     </StackPanel>
                 </HierarchicalDataTemplate>
 
-                <HierarchicalDataTemplate DataType="{x:Type models:NamedSection}"  ItemsSource="{Binding Items}">
+                <HierarchicalDataTemplate DataType="{x:Type models:NamedSection}"  ItemsSource="{Binding Sections}">
                     <StackPanel Orientation="Horizontal" Margin="0,1">
 
                         <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="0,0,5,0" Width="75" FontWeight="DemiBold"/>

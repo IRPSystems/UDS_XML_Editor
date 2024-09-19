@@ -174,9 +174,9 @@ namespace UDS_XML_Editor.Services
 			if (nodeService.ChildNodes.Count == 0)
 				return;
 
-			NamedSection subFuncs = new NamedSection() { Name = "SubFuncs", Items = new ObservableCollection<BaseXmlSection>() };
-			NamedSection fields = new NamedSection() { Name = "Fields", Items = new ObservableCollection<BaseXmlSection>() };
-			NamedSection dataIDs = new NamedSection() { Name = "DataIDs", Items = new ObservableCollection<BaseXmlSection>() };
+			NamedSection subFuncs = new NamedSection() { Name = "SubFuncs", Sections = new ObservableCollection<BaseXmlSection>() };
+			NamedSection fields = new NamedSection() { Name = "Fields", Sections = new ObservableCollection<BaseXmlSection>() };
+			NamedSection dataIDs = new NamedSection() { Name = "DataIDs", Sections = new ObservableCollection<BaseXmlSection>() };
 			
 
 			foreach (XmlNode node in nodeService.ChildNodes)
@@ -191,7 +191,7 @@ namespace UDS_XML_Editor.Services
 
 					case "Field":
 						Field field = GetField(node);
-						fields.Items.Add(field);
+						fields.Sections.Add(field);
 						break;
 
 					case "DataID":
@@ -204,11 +204,11 @@ namespace UDS_XML_Editor.Services
 
 			service.Sections = new ObservableCollection<BaseXmlSection>();
 
-			if (subFuncs.Items.Count > 0) 
+			if (subFuncs.Sections.Count > 0) 
 				service.Sections.Add(subFuncs);
-			if (fields.Items.Count > 0)
+			if (fields.Sections.Count > 0)
 				service.Sections.Add(fields);
-			if (dataIDs.Items.Count > 0)
+			if (dataIDs.Sections.Count > 0)
 				service.Sections.Add(dataIDs);
 		}
 
@@ -243,15 +243,15 @@ namespace UDS_XML_Editor.Services
 			NamedSection namedSection)
 		{
 			SubFunc subFunc = new SubFunc();
-			namedSection.Items.Add(subFunc);
+			namedSection.Sections.Add(subFunc);
 
 			GetSubFuncAttributes(
 				nodeSubFunc,
 				subFunc);
 
-			NamedSection subFuncs = new NamedSection() { Name = "SubFuncs", Items = new ObservableCollection<BaseXmlSection>() };
-			NamedSection fields = new NamedSection() { Name = "Fields", Items = new ObservableCollection<BaseXmlSection>() };
-			NamedSection dataIDs = new NamedSection() { Name = "DataIDs", Items = new ObservableCollection<BaseXmlSection>() };
+			NamedSection subFuncs = new NamedSection() { Name = "SubFuncs", Sections = new ObservableCollection<BaseXmlSection>() };
+			NamedSection fields = new NamedSection() { Name = "Fields", Sections = new ObservableCollection<BaseXmlSection>() };
+			NamedSection dataIDs = new NamedSection() { Name = "DataIDs", Sections = new ObservableCollection<BaseXmlSection>() };
 
 
 			foreach (XmlNode node in nodeSubFunc.ChildNodes)
@@ -266,7 +266,7 @@ namespace UDS_XML_Editor.Services
 
 					case "Field":
 						Field field = GetField(node);
-						fields.Items.Add(field);
+						fields.Sections.Add(field);
 						break;
 
 					case "DataID":
@@ -279,11 +279,11 @@ namespace UDS_XML_Editor.Services
 
 			subFunc.Sections = new ObservableCollection<BaseXmlSection>();
 
-			if (subFuncs.Items.Count > 0)
+			if (subFuncs.Sections.Count > 0)
 				subFunc.Sections.Add(subFuncs);
-			if (fields.Items.Count > 0)
+			if (fields.Sections.Count > 0)
 				subFunc.Sections.Add(fields);
-			if (dataIDs.Items.Count > 0)
+			if (dataIDs.Sections.Count > 0)
 				subFunc.Sections.Add(dataIDs);
 
 		}
@@ -321,24 +321,48 @@ namespace UDS_XML_Editor.Services
 			NamedSection namedSection)
 		{
 			DataID dataID = new DataID();
-			namedSection.Items.Add(dataID);
+			namedSection.Sections.Add(dataID);
 
 			GetDataIDAttributes(
 				nodeDataID,
 				dataID);
 
-			dataID.FieldsList = new ObservableCollection<BaseXmlSection>();
+			NamedSection subFuncs = new NamedSection() { Name = "SubFuncs", Sections = new ObservableCollection<BaseXmlSection>() };
+			NamedSection fields = new NamedSection() { Name = "Fields", Sections = new ObservableCollection<BaseXmlSection>() };
+			NamedSection dataIDs = new NamedSection() { Name = "DataIDs", Sections = new ObservableCollection<BaseXmlSection>() };
+
+
 			foreach (XmlNode node in nodeDataID.ChildNodes)
 			{
 				switch (node.Name)
 				{
+					case "SubFunc":
+						GetSubFunc(
+							node,
+							subFuncs);
+						break;
+
 					case "Field":
 						Field field = GetField(node);
-						dataID.FieldsList.Add(field);
+						fields.Sections.Add(field);
+						break;
+
+					case "DataID":
+						GetDataID(
+							node,
+							dataIDs);
 						break;
 				}
 			}
 
+			dataID.Sections = new ObservableCollection<BaseXmlSection>();
+
+			if (subFuncs.Sections.Count > 0)
+				dataID.Sections.Add(subFuncs);
+			if (fields.Sections.Count > 0)
+				dataID.Sections.Add(fields);
+			if (dataIDs.Sections.Count > 0)
+				dataID.Sections.Add(dataIDs);
 		}
 
 		private void GetDataIDAttributes(

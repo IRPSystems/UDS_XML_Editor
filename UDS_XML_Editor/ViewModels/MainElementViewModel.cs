@@ -3,21 +3,39 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using System.Windows;
 using UDS_XML_Editor.Models;
 
 namespace UDS_XML_Editor.ViewModels
 {
     public class MainElementViewModel: ObservableObject
     {
-        public ObservableCollection<BaseXmlSection> DataContext { get; set; }
+		#region Properties
 
-        public MainElementViewModel()
+		public ObservableCollection<BaseXmlSection> DataContext { get; set; }
+
+		public string SearchName { get; set; }
+		public string SearchID { get; set; }
+
+		#endregion Properties
+
+		#region Constructor
+
+		public MainElementViewModel()
         {
 			ExpandAllCommand = new RelayCommand(ExpandAll);
 			CollapseAllCommand = new RelayCommand(CollapseAll);
+			SearchCommand = new RelayCommand(Search);
+			DeleteSearchCommand = new RelayCommand(DeleteSearch);
 		}
 
-        private void ExpandAll()
+		#endregion Constructor
+
+		#region Methods
+
+		#region Expand/Collapse
+
+		private void ExpandAll()
         {
 			ExpandAll(DataContext);
 		}
@@ -36,17 +54,17 @@ namespace UDS_XML_Editor.ViewModels
 				{
 					ExpandAll(service.Sections);
 				}
-				else if (section is NamedSection namedSection && namedSection.Items != null && namedSection.Items.Count > 0)
+				else if (section is NamedSection namedSection && namedSection.Sections != null && namedSection.Sections.Count > 0)
 				{
-					ExpandAll(namedSection.Items);
+					ExpandAll(namedSection.Sections);
 				}
 				else if (section is SubFunc subFunc && subFunc.Sections != null && subFunc.Sections.Count > 0)
 				{
 					ExpandAll(subFunc.Sections);
 				}
-				else if (section is DataID dataID && dataID.FieldsList != null && dataID.FieldsList.Count > 0)
+				else if (section is DataID dataID && dataID.Sections != null && dataID.Sections.Count > 0)
 				{
-					ExpandAll(dataID.FieldsList);
+					ExpandAll(dataID.Sections);
 				}
 			}
 		}
@@ -72,22 +90,123 @@ namespace UDS_XML_Editor.ViewModels
 				{
 					CollapseAll(service.Sections);
 				}
-				else if (section is NamedSection namedSection && namedSection.Items != null && namedSection.Items.Count > 0)
+				else if (section is NamedSection namedSection && namedSection.Sections != null && namedSection.Sections.Count > 0)
 				{
-					CollapseAll(namedSection.Items);
+					CollapseAll(namedSection.Sections);
 				}
 				else if (section is SubFunc subFunc && subFunc.Sections != null && subFunc.Sections.Count > 0)
 				{
 					CollapseAll(subFunc.Sections);
 				}
-				else if (section is DataID dataID && dataID.FieldsList != null && dataID.FieldsList.Count > 0)
+				else if (section is DataID dataID && dataID.Sections != null && dataID.Sections.Count > 0)
 				{
-					CollapseAll(dataID.FieldsList);
+					CollapseAll(dataID.Sections);
 				}
 			}
 		}
 
+		#endregion Expand/Collapse
+
+		private void Search()
+		{
+			SetAllVisible(DataContext);
+			Search(DataContext);
+		}
+
+		private Visibility Search(ObservableCollection<BaseXmlSection> itemsList)
+		{
+
+
+			Visibility visibilityTop = Visibility.Collapsed;
+			foreach (BaseXmlSection item in itemsList)
+			{
+				Visibility visibility = Visibility.Collapsed;
+
+				bool isMathcing = false;
+				if (string.IsNullOrEmpty(SearchName) == false)
+				{
+					isMathcing |= (SearchName.ToLower() == item.Name.ToLower());					
+				}
+
+				if (string.IsNullOrEmpty(SearchID) == false && string.IsNullOrEmpty(item.ID) == false)
+				{
+					isMathcing |= (SearchID.ToLower() == item.ID.ToLower());
+				}
+
+				if (isMathcing)
+				{
+					visibility = Visibility.Visible;
+				}
+
+				if (visibility == Visibility.Visible)
+				{
+					item.Visibility = visibility;
+					if (visibility == Visibility.Visible)
+						visibilityTop = visibility;
+					continue;
+				}
+
+				Visibility vis = Visibility.Collapsed;
+				if (item is Customer customer)
+				{
+					vis = Search(customer.FWStepsList);
+					if (vis == Visibility.Visible)
+						visibility = vis;
+				}
+				else
+				{
+					if (item.Sections != null)
+					{
+						vis = Search(item.Sections);
+						if (vis == Visibility.Visible)
+							visibility = vis;
+					}
+				}
+
+				item.Visibility = visibility;
+
+				if (visibility == Visibility.Visible)
+					visibilityTop = visibility;
+			}
+
+			return visibilityTop;
+		}
+
+		private void SetAllVisible(ObservableCollection<BaseXmlSection> itemsList)
+		{
+			if (itemsList == null)
+				return;
+
+
+			foreach (BaseXmlSection item in itemsList)
+			{
+				item.Visibility = Visibility.Visible;
+
+				if (item is Customer customer)
+				{
+					SetAllVisible(customer.FWStepsList);
+				}
+				else
+				{
+					SetAllVisible(item.Sections);
+				}
+			}
+		}
+
+		private void DeleteSearch()
+		{
+			SetAllVisible(DataContext);
+		}
+
+		#endregion Methods
+
+		#region Commands
+
 		public RelayCommand ExpandAllCommand { get; set; }
 		public RelayCommand CollapseAllCommand { get; set; }
+		public RelayCommand SearchCommand { get; set; }
+		public RelayCommand DeleteSearchCommand { get; private set; }
+
+		#endregion Commands
 	}
 }

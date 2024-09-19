@@ -133,7 +133,7 @@ namespace UDS_XML_Editor.Services
 			NamedSection namedSection,
 			XmlWriter writer)
 		{
-			foreach (BaseXmlSection item in namedSection.Items)
+			foreach (BaseXmlSection item in namedSection.Sections)
 			{
 				if(item is SubFunc subFunc)
 					WriteSubFunc(subFunc, writer);
@@ -223,18 +223,18 @@ namespace UDS_XML_Editor.Services
 			if (string.IsNullOrEmpty(dataID.ID) == false)
 				writer.WriteAttributeString("ID", dataID.ID);
 
-			if (dataID.FieldsList == null || dataID.FieldsList.Count == 0)
+			if (dataID.Sections == null || dataID.Sections.Count == 0)
 			{
 				writer.WriteEndElement();
 				return;
 			}
 
-			foreach (BaseXmlSection section in dataID.FieldsList)
+			foreach (BaseXmlSection section in dataID.Sections)
 			{
-				if (!(section is Field field))
+				if (!(section is NamedSection namedSection))
 					continue;
 
-				WriteField(field, writer);
+				WriteSingleNamedSection(namedSection, writer);
 			}
 
 

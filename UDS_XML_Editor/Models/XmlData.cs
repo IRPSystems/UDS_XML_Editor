@@ -1,12 +1,19 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace UDS_XML_Editor.Models
 {
 	public abstract class BaseXmlSection: ObservableObject
 	{
 		public bool IsExpanded { get; set; }
+		public Visibility Visibility { get; set; }
+
+		public string Name { get; set; }
+		public string ID { get; set; }
+
+		public ObservableCollection<BaseXmlSection> Sections { get; set; }
 	}
 
 	public class XmlData: BaseXmlSection
@@ -27,7 +34,6 @@ namespace UDS_XML_Editor.Models
 
 	public class Customer : BaseXmlSection
 	{
-		public string Name { get; set; }
 		public string Rate { get; set; }
 		public string TxID { get; set; }
 		public string RxID { get; set; }
@@ -38,37 +44,27 @@ namespace UDS_XML_Editor.Models
 
 	public class FWStep: BaseXmlSection
 	{
-		public string Name { get; set; }
+		
 	}
 
 	public class Service: BaseXmlSection
 	{
-		public string Name { get; set; }
-		public string ID { get; set; }
 		public string DataType { get; set; }
 
-		public ObservableCollection<BaseXmlSection> Sections { get; set; }
+		
 	}
 
 	public class NamedSection: BaseXmlSection
 	{
-		public string Name { get; set; }
-		public ObservableCollection<BaseXmlSection> Items { get; set; }
 	}
 
 	public class SubFunc: BaseXmlSection
 	{
-		public string Name { get; set; }
-		public string ID { get; set; }
 		public string DataType { get; set; }
-
-		//public ObservableCollection<BaseXmlSection> FieldsList { get; set; }
-		public ObservableCollection<BaseXmlSection> Sections { get; set; }
 	}
 
 	public class Field: BaseXmlSection
 	{
-		public string Name { get; set; }
 		public string DataType { get; set; }
 		public string PyDataType { get; set; }
 		public string DefVal { get; set; }
@@ -81,9 +77,5 @@ namespace UDS_XML_Editor.Models
 
 	public class DataID: BaseXmlSection
 	{
-		public string Name { get; set; }
-		public string ID { get; set; }
-
-		public ObservableCollection<BaseXmlSection> FieldsList { get; set; }
 	}
 }
