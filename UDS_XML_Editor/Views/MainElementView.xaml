@@ -151,7 +151,7 @@
                     </StackPanel>
                 </HierarchicalDataTemplate>
 
-                <HierarchicalDataTemplate DataType="{x:Type models:SubFunc}"  ItemsSource="{Binding FieldsList}">
+                <HierarchicalDataTemplate DataType="{x:Type models:SubFunc}"  ItemsSource="{Binding Sections}">
                     <StackPanel Orientation="Horizontal" Margin="0,1">
                         <TextBlock Text="SubFunc" VerticalAlignment="Center" Margin="0,0,20,0" Width="55" FontWeight="DemiBold"/>
 
@@ -170,7 +170,7 @@
                     </StackPanel>
                 </HierarchicalDataTemplate>
 
-                <HierarchicalDataTemplate DataType="{x:Type models:DataID}"  ItemsSource="{Binding FieldsList}">
+                <HierarchicalDataTemplate DataType="{x:Type models:DataID}"  ItemsSource="{Binding Sections}">
                     <StackPanel Orientation="Horizontal" Margin="0,1">
                         <TextBlock Text="DataID" VerticalAlignment="Center" Margin="0,0,20,0" Width="55" FontWeight="DemiBold"/>
 
