@@ -17,7 +17,6 @@ DefaultGroupName=UDS_XML_Editor
 SourceDir=UDS_XML_Editor\bin\Release\net6.0-windows
 OutputDir=..\..\..\..\Output
 OutputBaseFilename=UDS_XML_EditorSetup
-UsePreviousAppDir=no
 
 
 [Files]
@@ -25,8 +24,8 @@ Source: "*.*"; DestDir: "{app}"; Flags: recursesubdirs ignoreversion;
 
 
 [Icons]
-Name: "{group}\UDS_XML_Editor" ; Filename: "{app}\UDS_XML_Editor.exe";  Tasks: startmenu; IconFilename: {app}\Resources\XML.ico
-Name: "{commondesktop}\UDS_XML_Editor {#MyAppVersion}"; Filename: "{app}\UDS_XML_Editor.exe"; Tasks: desktopicon; IconFilename: {app}\Resources\XML.ico
+Name: "{group}\UDS_XML_Editor" ; Filename: "{app}\UDS_XML_Editor.exe";  Tasks: startmenu; IconFilename: {app}\XML.ico
+Name: "{commondesktop}\UDS_XML_Editor {#MyAppVersion}"; Filename: "{app}\UDS_XML_Editor.exe"; Tasks: desktopicon; IconFilename: {app}\XML.ico
 
 [Tasks]
 Name: "desktopicon"; Description: "Create a desktop shortcut"; GroupDescription: "Additional icons:"; Flags: unchecked

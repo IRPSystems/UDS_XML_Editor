@@ -27,4 +27,8 @@
     <ProjectReference Include="..\Infrastructure\Services\Services.csproj" />
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy &quot;$(SolutionDir)UDS_XML_Editor\resources\*.*&quot; &quot;$(OutDir)*.*&quot;" />
+  </Target>
+
 </Project>
