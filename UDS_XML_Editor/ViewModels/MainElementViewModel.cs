@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Windows;
 using UDS_XML_Editor.Models;
+using UDS_XML_Editor.Views;
 
 namespace UDS_XML_Editor.ViewModels
 {
@@ -27,6 +28,7 @@ namespace UDS_XML_Editor.ViewModels
 			CollapseAllCommand = new RelayCommand(CollapseAll);
 			SearchCommand = new RelayCommand(Search);
 			DeleteSearchCommand = new RelayCommand(DeleteSearch);
+			AddSubSectionCommand = new RelayCommand<BaseXmlSection>(AddSubSection);
 		}
 
 		#endregion Constructor
@@ -198,6 +200,12 @@ namespace UDS_XML_Editor.ViewModels
 			SetAllVisible(DataContext);
 		}
 
+		private void AddSubSection(BaseXmlSection baseItem)
+		{
+			AddSectionView addSectionView = new AddSectionView();
+			addSectionView.ShowDialog();
+		}
+
 		#endregion Methods
 
 		#region Commands
@@ -206,6 +214,7 @@ namespace UDS_XML_Editor.ViewModels
 		public RelayCommand CollapseAllCommand { get; set; }
 		public RelayCommand SearchCommand { get; set; }
 		public RelayCommand DeleteSearchCommand { get; private set; }
+		public RelayCommand<BaseXmlSection> AddSubSectionCommand { get; internal set; }
 
 		#endregion Commands
 	}

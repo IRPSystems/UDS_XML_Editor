@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"    
              xmlns:models="clr-namespace:UDS_XML_Editor.Models"
-             xmlns:converters="clr-namespace:UDS_XML_Editor.Converters"
              xmlns:local="clr-namespace:UDS_XML_Editor.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -15,9 +14,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Controls;component/Resources/ButtonWithIcon.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
-            <converters:HideEmptyStringsConverter x:Key="HideEmptyStringsConverter"/>
-
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -89,48 +85,53 @@
                 <HierarchicalDataTemplate DataType="{x:Type models:Customer}" ItemsSource="{Binding FWStepsList}">
                     <StackPanel Orientation="Horizontal" Margin="0,1">
                         <TextBlock Text="Customer" VerticalAlignment="Center" Margin="0,0,20,0" Width="75" FontWeight="DemiBold"/>
-                        
+
+                        <Button Grid.Column="2" Style="{StaticResource ButtonWithIconStyle}"
+                                Height="25" Width="25"
+                                ToolTip="Add sub section"
+                                Command="{Binding DataContext.AddSubSectionCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TreeView}}"
+                                CommandParameter="{Binding}"
+                                Margin="0,1,50,1">
+                            <iconPacks:PackIconMaterial Kind="Plus"/>
+                        </Button>
+
                         <TextBlock Text="Name" VerticalAlignment="Center" Margin="0,0,5,0" Width="45"/>
                         <TextBox Text="{Binding Name}" Margin="0,0,50,0" Width="200"/>
 
-                        <TextBlock Text="Rate" VerticalAlignment="Center" Margin="0,0,5,0" Width="35"
-                                   Visibility="{Binding Rate, Converter={StaticResource HideEmptyStringsConverter}}"/>
-                        <TextBox Text="{Binding Rate}" Margin="0,0,50,0" Width="75"
-                                   Visibility="{Binding Rate, Converter={StaticResource HideEmptyStringsConverter}}"/>
+                        <TextBlock Text="Rate" VerticalAlignment="Center" Margin="0,0,5,0" Width="35"/>
+                        <TextBox Text="{Binding Rate}" Margin="0,0,50,0" Width="75"/>
 
-                        <TextBlock Text="TxID" VerticalAlignment="Center" Margin="0,0,5,0" Width="35"
-                                   Visibility="{Binding TxID, Converter={StaticResource HideEmptyStringsConverter}}"/>
-                        <TextBox Text="{Binding TxID}" Margin="0,0,50,0" Width="75"
-                                   Visibility="{Binding TxID, Converter={StaticResource HideEmptyStringsConverter}}"/>
+                        <TextBlock Text="TxID" VerticalAlignment="Center" Margin="0,0,5,0" Width="35"/>
+                        <TextBox Text="{Binding TxID}" Margin="0,0,50,0" Width="75"/>
 
-                        <TextBlock Text="RxID" VerticalAlignment="Center" Margin="0,0,5,0" Width="35"
-                                   Visibility="{Binding RxID, Converter={StaticResource HideEmptyStringsConverter}}"/>
-                        <TextBox Text="{Binding RxID}" Margin="0,0,50,0" Width="75"
-                                   Visibility="{Binding RxID, Converter={StaticResource HideEmptyStringsConverter}}"/>
+                        <TextBlock Text="RxID" VerticalAlignment="Center" Margin="0,0,5,0" Width="35"/>
+                        <TextBox Text="{Binding RxID}" Margin="0,0,50,0" Width="75"/>
 
-                        <TextBlock Text="BCID" VerticalAlignment="Center" Margin="0,0,5,0" Width="55"
-                                   Visibility="{Binding BCID, Converter={StaticResource HideEmptyStringsConverter}}"/>
-                        <TextBox Text="{Binding BCID}" Margin="0,0,50,0" Width="55"
-                                   Visibility="{Binding BCID, Converter={StaticResource HideEmptyStringsConverter}}"/>
+                        <TextBlock Text="BCID" VerticalAlignment="Center" Margin="0,0,5,0" Width="55"/>
+                        <TextBox Text="{Binding BCID}" Margin="0,0,50,0" Width="55"/>
                     </StackPanel>
                 </HierarchicalDataTemplate>
 
                 <HierarchicalDataTemplate DataType="{x:Type models:Service}"  ItemsSource="{Binding Sections}">
                     <StackPanel Orientation="Horizontal" Margin="0,1">
                         <TextBlock Text="Service" VerticalAlignment="Center" Margin="0,0,20,0" Width="55" FontWeight="DemiBold"/>
+
+                        <Button Grid.Column="2" Style="{StaticResource ButtonWithIconStyle}"
+                                Height="25" Width="25"
+                                ToolTip="Add sub section"
+                                Command="{Binding DataContext.AddSubSectionCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TreeView}}"
+                                Margin="0,1,50,1">
+                            <iconPacks:PackIconMaterial Kind="Plus"/>
+                        </Button>
                         
                         <TextBlock Text="Name" VerticalAlignment="Center" Margin="0,0,5,0" Width="45"/>
                         <TextBox Text="{Binding Name}" Margin="0,0,50,0" Width="200"/>
 
-                        <TextBlock Text="ID" VerticalAlignment="Center" Margin="0,0,5,0" Width="35"
-                                   Visibility="{Binding ID, Converter={StaticResource HideEmptyStringsConverter}}"/>
-                        <TextBox Text="{Binding ID}" Margin="0,0,50,0" Width="75"
-                                   Visibility="{Binding ID, Converter={StaticResource HideEmptyStringsConverter}}"/>
+                        <TextBlock Text="ID" VerticalAlignment="Center" Margin="0,0,5,0" Width="35"/>
+                        <TextBox Text="{Binding ID}" Margin="0,0,50,0" Width="75"/>
 
-                        <TextBlock Text="DataType" VerticalAlignment="Center" Margin="0,0,5,0" Width="75"
-                                   Visibility="{Binding DataType, Converter={StaticResource HideEmptyStringsConverter}}"/>
-                        <TextBox Text="{Binding DataType}" Margin="0,0,50,0" Width="75"
-                                 Visibility="{Binding DataType, Converter={StaticResource HideEmptyStringsConverter}}"/>
+                        <TextBlock Text="DataType" VerticalAlignment="Center" Margin="0,0,5,0" Width="75"/>
+                        <TextBox Text="{Binding DataType}" Margin="0,0,50,0" Width="75"/>
                     </StackPanel>
                 </HierarchicalDataTemplate>
 
@@ -155,18 +156,22 @@
                     <StackPanel Orientation="Horizontal" Margin="0,1">
                         <TextBlock Text="SubFunc" VerticalAlignment="Center" Margin="0,0,20,0" Width="55" FontWeight="DemiBold"/>
 
+                        <Button Grid.Column="2" Style="{StaticResource ButtonWithIconStyle}"
+                                Height="25" Width="25"
+                                ToolTip="Add sub section"
+                                Command="{Binding DataContext.AddSubSectionCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TreeView}}"
+                                Margin="0,1,50,1">
+                            <iconPacks:PackIconMaterial Kind="Plus"/>
+                        </Button>
+
                         <TextBlock Text="Name" VerticalAlignment="Center" Margin="0,0,5,0" Width="45"/>
                         <TextBox Text="{Binding Name}" Margin="0,0,50,0" Width="200"/>
 
-                        <TextBlock Text="ID" VerticalAlignment="Center" Margin="0,0,5,0" Width="25"
-                                   Visibility="{Binding ID, Converter={StaticResource HideEmptyStringsConverter}}"/>
-                        <TextBox Text="{Binding ID}" Margin="0,0,50,0" Width="75"
-                                   Visibility="{Binding ID, Converter={StaticResource HideEmptyStringsConverter}}"/>
+                        <TextBlock Text="ID" VerticalAlignment="Center" Margin="0,0,5,0" Width="25"/>
+                        <TextBox Text="{Binding ID}" Margin="0,0,50,0" Width="75"/>
 
-                        <TextBlock Text="DataType" VerticalAlignment="Center" Margin="0,0,5,0" Width="75"
-                                   Visibility="{Binding DataType, Converter={StaticResource HideEmptyStringsConverter}}"/>
-                        <TextBox Text="{Binding DataType}" Margin="0,0,50,0" Width="75"
-                                 Visibility="{Binding DataType, Converter={StaticResource HideEmptyStringsConverter}}"/>
+                        <TextBlock Text="DataType" VerticalAlignment="Center" Margin="0,0,5,0" Width="75"/>
+                        <TextBox Text="{Binding DataType}" Margin="0,0,50,0" Width="75"/>
                     </StackPanel>
                 </HierarchicalDataTemplate>
 
@@ -174,13 +179,19 @@
                     <StackPanel Orientation="Horizontal" Margin="0,1">
                         <TextBlock Text="DataID" VerticalAlignment="Center" Margin="0,0,20,0" Width="55" FontWeight="DemiBold"/>
 
+                        <Button Grid.Column="2" Style="{StaticResource ButtonWithIconStyle}"
+                                Height="25" Width="25"
+                                ToolTip="Add sub section"
+                                Command="{Binding DataContext.AddSubSectionCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TreeView}}"
+                                Margin="0,1,50,1">
+                            <iconPacks:PackIconMaterial Kind="Plus"/>
+                        </Button>
+
                         <TextBlock Text="Name" VerticalAlignment="Center" Margin="0,0,5,0" Width="45"/>
                         <TextBox Text="{Binding Name}" Margin="0,0,50,0" Width="200"/>
 
-                        <TextBlock Text="ID" VerticalAlignment="Center" Margin="0,0,5,0" Width="25"
-                                   Visibility="{Binding ID, Converter={StaticResource HideEmptyStringsConverter}}"/>
-                        <TextBox Text="{Binding ID}" Margin="0,0,50,0" Width="75"
-                                   Visibility="{Binding ID, Converter={StaticResource HideEmptyStringsConverter}}"/>
+                        <TextBlock Text="ID" VerticalAlignment="Center" Margin="0,0,5,0" Width="25"/>
+                        <TextBox Text="{Binding ID}" Margin="0,0,50,0" Width="75"/>
                     </StackPanel>
                 </HierarchicalDataTemplate>
 
@@ -191,45 +202,29 @@
                         <TextBlock Text="Name" VerticalAlignment="Center" Margin="0,0,5,0" Width="45"/>
                         <TextBox Text="{Binding Name}" Margin="0,0,50,0" Width="200"/>
 
-                        <TextBlock Text="DataType" VerticalAlignment="Center" Margin="0,0,5,0" Width="75"
-                                   Visibility="{Binding DataType, Converter={StaticResource HideEmptyStringsConverter}}"/>
-                        <TextBox Text="{Binding DataType}" Margin="0,0,50,0" Width="75"
-                                   Visibility="{Binding DataType, Converter={StaticResource HideEmptyStringsConverter}}"/>
+                        <TextBlock Text="DataType" VerticalAlignment="Center" Margin="0,0,5,0" Width="75"/>
+                        <TextBox Text="{Binding DataType}" Margin="0,0,50,0" Width="75"/>
 
-                        <TextBlock Text="PyDataType" VerticalAlignment="Center" Margin="0,0,5,0" Width="75"
-                                   Visibility="{Binding PyDataType, Converter={StaticResource HideEmptyStringsConverter}}"/>
-                        <TextBox Text="{Binding PyDataType}" Margin="0,0,50,0" Width="75"
-                                   Visibility="{Binding PyDataType, Converter={StaticResource HideEmptyStringsConverter}}"/>
+                        <TextBlock Text="PyDataType" VerticalAlignment="Center" Margin="0,0,5,0" Width="75"/>
+                        <TextBox Text="{Binding PyDataType}" Margin="0,0,50,0" Width="75"/>
 
-                        <TextBlock Text="DefVal" VerticalAlignment="Center" Margin="0,0,5,0" Width="45"
-                                   Visibility="{Binding DefVal, Converter={StaticResource HideEmptyStringsConverter}}"/>
-                        <TextBox Text="{Binding DefVal}" Margin="0,0,50,0" Width="75"
-                                   Visibility="{Binding DefVal, Converter={StaticResource HideEmptyStringsConverter}}"/>
+                        <TextBlock Text="DefVal" VerticalAlignment="Center" Margin="0,0,5,0" Width="45"/>
+                        <TextBox Text="{Binding DefVal}" Margin="0,0,50,0" Width="75"/>
 
-                        <TextBlock Text="MinVal" VerticalAlignment="Center" Margin="0,0,5,0" Width="45"
-                                   Visibility="{Binding MinVal, Converter={StaticResource HideEmptyStringsConverter}}"/>
-                        <TextBox Text="{Binding MinVal}" Margin="0,0,50,0" Width="75"
-                                   Visibility="{Binding MinVal, Converter={StaticResource HideEmptyStringsConverter}}"/>
+                        <TextBlock Text="MinVal" VerticalAlignment="Center" Margin="0,0,5,0" Width="45"/>
+                        <TextBox Text="{Binding MinVal}" Margin="0,0,50,0" Width="75"/>
 
-                        <TextBlock Text="MaxVal" VerticalAlignment="Center" Margin="0,0,5,0" Width="45"
-                                   Visibility="{Binding MaxVal, Converter={StaticResource HideEmptyStringsConverter}}"/>
-                        <TextBox Text="{Binding MaxVal}" Margin="0,0,50,0" Width="75"
-                                   Visibility="{Binding MaxVal, Converter={StaticResource HideEmptyStringsConverter}}"/>
+                        <TextBlock Text="MaxVal" VerticalAlignment="Center" Margin="0,0,5,0" Width="45"/>
+                        <TextBox Text="{Binding MaxVal}" Margin="0,0,50,0" Width="75"/>
 
-                        <TextBlock Text="Unit" VerticalAlignment="Center" Margin="0,0,5,0" Width="35"
-                                   Visibility="{Binding Unit, Converter={StaticResource HideEmptyStringsConverter}}"/>
-                        <TextBox Text="{Binding Unit}" Margin="0,0,50,0" Width="75"
-                                   Visibility="{Binding Unit, Converter={StaticResource HideEmptyStringsConverter}}"/>
+                        <TextBlock Text="Unit" VerticalAlignment="Center" Margin="0,0,5,0" Width="35"/>
+                        <TextBox Text="{Binding Unit}" Margin="0,0,50,0" Width="75"/>
 
-                        <TextBlock Text="Offset" VerticalAlignment="Center" Margin="0,0,5,0" Width="45"
-                                   Visibility="{Binding Offset, Converter={StaticResource HideEmptyStringsConverter}}"/>
-                        <TextBox Text="{Binding Offset}" Margin="0,0,50,0" Width="75"
-                                   Visibility="{Binding Offset, Converter={StaticResource HideEmptyStringsConverter}}"/>
+                        <TextBlock Text="Offset" VerticalAlignment="Center" Margin="0,0,5,0" Width="45"/>
+                        <TextBox Text="{Binding Offset}" Margin="0,0,50,0" Width="75"/>
 
-                        <TextBlock Text="Res" VerticalAlignment="Center" Margin="0,0,5,0" Width="35"
-                                   Visibility="{Binding Res, Converter={StaticResource HideEmptyStringsConverter}}"/>
-                        <TextBox Text="{Binding Res}" Margin="0,0,50,0" Width="75"
-                                   Visibility="{Binding Res, Converter={StaticResource HideEmptyStringsConverter}}"/>
+                        <TextBlock Text="Res" VerticalAlignment="Center" Margin="0,0,5,0" Width="35"/>
+                        <TextBox Text="{Binding Res}" Margin="0,0,50,0" Width="75"/>
                     </StackPanel>
                 </HierarchicalDataTemplate>
 
