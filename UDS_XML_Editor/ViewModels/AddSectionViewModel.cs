@@ -12,6 +12,7 @@ namespace UDS_XML_Editor.ViewModels
 		#region Properties
 
 		public BaseXmlSection BaseItem { get; set; }
+		public ObservableCollection<BaseXmlSection> ItemsList { get; set; }
 		public BaseXmlSection NewItem { get; set; }
 
 		public ObservableCollection<string> ItemSubTypes { get; set; }
@@ -21,6 +22,8 @@ namespace UDS_XML_Editor.ViewModels
 		public Visibility SubFuncVisibility { get; set; }
 		public Visibility DataIDVisibility { get; set; }
 		public Visibility FieldVisibility { get; set; }
+		public Visibility CustomerVisibility { get; set; }
+		public Visibility ServiceVisibility { get; set; }
 
 		#endregion Properties
 
@@ -47,18 +50,37 @@ namespace UDS_XML_Editor.ViewModels
 			SubFuncVisibility = Visibility.Collapsed;
 			DataIDVisibility = Visibility.Collapsed;
 			FieldVisibility = Visibility.Collapsed;
+			CustomerVisibility = Visibility.Collapsed;
+			ServiceVisibility = Visibility.Collapsed;
 		}
 
 		private void Loaded()
 		{
-			if (BaseItem == null)
+			if (BaseItem == null && ItemsList == null)
 				return;
 
 			ItemSubTypes.Clear();
 
 			SelecteSubType = null;
 
-			if (BaseItem is Customer)
+			if(BaseItem == null && ItemsList != null)
+			{
+				if (ItemsList.Count == 0)
+					return;
+
+				if (ItemsList[0] is Customer)
+				{
+					ItemSubTypes.Add("Customer");
+					SelecteSubType = ItemSubTypes[0];
+				}
+				else if (ItemsList[0] is Service)
+				{
+					ItemSubTypes.Add("Service");
+					SelecteSubType = ItemSubTypes[0];
+				}
+
+			}
+			else if (BaseItem is Customer)
 			{
 				ItemSubTypes.Add("FWStep");
 				SelecteSubType = ItemSubTypes[0];
@@ -88,25 +110,37 @@ namespace UDS_XML_Editor.ViewModels
 		{
 			SetVisibilityToCollapse();
 
-			if (SelecteSubType == "FWStep")
+			if (SelecteSubType == "Customer")
+			{
+				NewItem = new Customer();
+				CustomerVisibility = Visibility.Visible;
+			}
+
+			else if (SelecteSubType == "Service")
+			{
+				NewItem = new Service();
+				ServiceVisibility = Visibility.Visible;
+			}
+
+			else if (SelecteSubType == "FWStep")
 			{
 				NewItem = new FWStep();
 				FWStepVisibility = Visibility.Visible;
 			}
 
-			if (SelecteSubType == "SubFunc")
+			else if (SelecteSubType == "SubFunc")
 			{
 				NewItem = new SubFunc();
 				SubFuncVisibility = Visibility.Visible;
 			}
 
-			if (SelecteSubType == "DataID")
+			else if (SelecteSubType == "DataID")
 			{
 				NewItem = new DataID();
 				DataIDVisibility = Visibility.Visible;
 			}
 
-			if (SelecteSubType == "Field")
+			else if (SelecteSubType == "Field")
 			{
 				NewItem = new Field();
 				FieldVisibility = Visibility.Visible;
@@ -118,7 +152,11 @@ namespace UDS_XML_Editor.ViewModels
 			if (NewItem == null)
 				return;
 
-			if (BaseItem is Customer customer)
+			if (BaseItem == null && ItemsList != null)
+			{
+				ItemsList.Add(NewItem);
+			}
+			else if (BaseItem is Customer customer)
 			{
 				if (!(NewItem is FWStep))
 					return;

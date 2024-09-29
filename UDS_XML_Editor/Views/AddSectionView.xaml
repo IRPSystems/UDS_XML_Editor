@@ -181,6 +181,68 @@
             <TextBox Grid.Row="16" Grid.Column="2" Text="{Binding NewItem.Res}" />
         </Grid>
 
+        <Grid Name="grdCustomer" Grid.Row="4" Grid.ColumnSpan="3" VerticalAlignment="Top" Visibility="{Binding CustomerVisibility}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="27" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="27" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="27" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="27" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="27" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="75" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Name" VerticalAlignment="Center" />
+            <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding NewItem.Name}" />
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Rate" VerticalAlignment="Center" />
+            <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding NewItem.Rate}" />
+
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="TxID" VerticalAlignment="Center" />
+            <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding NewItem.TxID}" />
+
+            <TextBlock Grid.Row="6" Grid.Column="0" Text="RxID" VerticalAlignment="Center" />
+            <TextBox Grid.Row="6" Grid.Column="2" Text="{Binding NewItem.RxID}" />
+
+            <TextBlock Grid.Row="8" Grid.Column="0" Text="BCID" VerticalAlignment="Center" />
+            <TextBox Grid.Row="8" Grid.Column="2" Text="{Binding NewItem.BCID}" />
+        </Grid>
+
+        <Grid Name="grdService" Grid.Row="4" Grid.ColumnSpan="3" VerticalAlignment="Top" Visibility="{Binding ServiceVisibility}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="27" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="27" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="27" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="27" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="75" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Name" VerticalAlignment="Center" />
+            <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding NewItem.Name}" />
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="ID" VerticalAlignment="Center" />
+            <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding NewItem.ID}" />
+
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Data type" VerticalAlignment="Center" />
+            <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding NewItem.DataType}" />
+        </Grid>
+
         <StackPanel Grid.Row="6" Grid.ColumnSpan="3" Orientation="Horizontal">
 
             <Button Content="OK" Command="{Binding OKCommand}" Click="OK_Click" Margin="0,0,5,0" Width="75"/>

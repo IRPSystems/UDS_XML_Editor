@@ -26,7 +26,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" >
-            <Button Grid.Column="2" Style="{StaticResource ButtonWithIconStyle}"
+            <Button Style="{StaticResource ButtonWithIconStyle}"
                     Height="35" Width="35"
                     ToolTip="Expand all"
                     Command="{Binding ExpandAllCommand}"
@@ -34,12 +34,20 @@
                 <iconPacks:PackIconMaterial Kind="ArrowExpandAll" Height="25" Width="25"/>
             </Button>
 
-            <Button Grid.Column="4" Style="{StaticResource ButtonWithIconStyle}"
+            <Button Style="{StaticResource ButtonWithIconStyle}"
                     Height="35" Width="35"
                     ToolTip="Collapse all"
                     Command="{Binding CollapseAllCommand}"
                     Margin="0,1,5,1">
                 <iconPacks:PackIconMaterial Kind="ArrowCollapseAll" Height="25" Width="25"/>
+            </Button>
+            
+            <Button Style="{StaticResource ButtonWithIconStyle}"
+                    Height="35" Width="35"
+                    ToolTip="Add section"
+                    Command="{Binding AddSectionCommand}"
+                    Margin="0,1,5,1">
+                <iconPacks:PackIconMaterial Kind="Plus" Height="25" Width="25"/>
             </Button>
 
             <Line Y1="1" Stretch="Fill" Stroke="{DynamicResource MahApps.Brushes.Accent2}" Margin="0,0,50,0" />

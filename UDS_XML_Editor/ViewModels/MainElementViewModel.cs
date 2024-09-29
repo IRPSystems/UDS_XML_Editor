@@ -29,6 +29,7 @@ namespace UDS_XML_Editor.ViewModels
 			SearchCommand = new RelayCommand(Search);
 			DeleteSearchCommand = new RelayCommand(DeleteSearch);
 			AddSubSectionCommand = new RelayCommand<BaseXmlSection>(AddSubSection);
+			AddSectionCommand = new RelayCommand(AddSection);
 		}
 
 		#endregion Constructor
@@ -205,6 +206,22 @@ namespace UDS_XML_Editor.ViewModels
 			AddSectionViewModel addSectionViewModel = new AddSectionViewModel()
 			{
 				BaseItem = baseItem,
+				ItemsList = null,
+			};
+
+			AddSectionView addSectionView = new AddSectionView()
+			{
+				DataContext = addSectionViewModel,
+			};
+			addSectionView.Show();
+		}
+
+		private void AddSection()
+		{
+			AddSectionViewModel addSectionViewModel = new AddSectionViewModel()
+			{
+				BaseItem = null,
+				ItemsList = DataContext,
 			};
 
 			AddSectionView addSectionView = new AddSectionView()
@@ -218,11 +235,12 @@ namespace UDS_XML_Editor.ViewModels
 
 		#region Commands
 
-		public RelayCommand ExpandAllCommand { get; set; }
-		public RelayCommand CollapseAllCommand { get; set; }
-		public RelayCommand SearchCommand { get; set; }
+		public RelayCommand ExpandAllCommand { get; private set; }
+		public RelayCommand CollapseAllCommand { get; private set; }
+		public RelayCommand SearchCommand { get; private set; }
 		public RelayCommand DeleteSearchCommand { get; private set; }
-		public RelayCommand<BaseXmlSection> AddSubSectionCommand { get; internal set; }
+		public RelayCommand<BaseXmlSection> AddSubSectionCommand { get; private set; }
+		public RelayCommand AddSectionCommand { get; private set; }
 
 		#endregion Commands
 	}
