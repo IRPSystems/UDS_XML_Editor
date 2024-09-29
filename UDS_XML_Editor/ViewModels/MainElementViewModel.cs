@@ -202,8 +202,16 @@ namespace UDS_XML_Editor.ViewModels
 
 		private void AddSubSection(BaseXmlSection baseItem)
 		{
-			AddSectionView addSectionView = new AddSectionView();
-			addSectionView.ShowDialog();
+			AddSectionViewModel addSectionViewModel = new AddSectionViewModel()
+			{
+				BaseItem = baseItem,
+			};
+
+			AddSectionView addSectionView = new AddSectionView()
+			{
+				DataContext = addSectionViewModel,
+			};
+			addSectionView.Show();
 		}
 
 		#endregion Methods

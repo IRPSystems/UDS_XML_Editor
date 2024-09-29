@@ -24,5 +24,15 @@ namespace UDS_XML_Editor.Views
 		{
 			InitializeComponent();
 		}
+
+		private void OK_Click(object sender, RoutedEventArgs e)
+		{
+			Close();
+		}
+
+		private void Cancel_Click(object sender, RoutedEventArgs e)
+		{
+			Close();
+		}
 	}
 }

@@ -3,11 +3,190 @@
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
                  xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" 
                  xmlns:local="clr-namespace:UDS_XML_Editor.Views"
                  mc:Ignorable="d"
-                 Title="Add Section" Height="450" Width="800">
-    <Grid>
-        
+                 Title="Add Section" 
+                 Height="450" Width="800"
+                 IsCloseButtonEnabled="False">
+
+    <i:Interaction.Triggers>
+
+        <i:EventTrigger EventName="Loaded">
+        <i:InvokeCommandAction Command="{Binding Path=DataContext.LoadedCommand, 
+                                                     Mode=OneWay, 
+                                                     RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" 
+                           PassEventArgsToCommand="False"/>
+        </i:EventTrigger>
+
+        <!--<i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding Path=DataContext.ClosingCommand, 
+                                                     Mode=OneWay, 
+                                                     RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" 
+                           PassEventArgsToCommand="True"/>
+        </i:EventTrigger>-->
+
+    </i:Interaction.Triggers>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="27" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="27" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="*" /> 
+            <RowDefinition Height="10" /> 
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="75" />
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Base section" VerticalAlignment="Center" />
+        <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding BaseItem.Name}" VerticalAlignment="Center" FontWeight="DemiBold"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Select type" VerticalAlignment="Center" />
+        <ComboBox Grid.Row="2" Grid.Column="2" 
+                  ItemsSource="{Binding ItemSubTypes}"
+                  SelectedItem="{Binding SelecteSubType}"
+                  HorizontalAlignment="Left" Width="150">
+
+            <i:Interaction.Triggers>
+
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding Path=DataContext.ItemSubTypes_SelectionChangedCommand, 
+                                                 Mode=OneWay, 
+                                                 RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" 
+                       PassEventArgsToCommand="False"/>
+                </i:EventTrigger>
+
+            </i:Interaction.Triggers>
+
+        </ComboBox>
+
+        <Grid Name="grdFWStep" Grid.Row="4" Grid.ColumnSpan="3" VerticalAlignment="Top" Visibility="{Binding FWStepVisibility}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="75" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Grid.Column="0" Text="Name" VerticalAlignment="Center" />
+            <TextBox Grid.Column="2" Text="{Binding NewItem.Name}" />
+        </Grid>
+
+        <Grid Name="grdSubFunc" Grid.Row="4" Grid.ColumnSpan="3" VerticalAlignment="Top" Visibility="{Binding SubFuncVisibility}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="27" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="27" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="27" />
+            </Grid.RowDefinitions>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="75" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Name" VerticalAlignment="Center" />
+            <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding NewItem.Name}" />
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="ID" VerticalAlignment="Center" />
+            <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding NewItem.ID}" />
+
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Data type" VerticalAlignment="Center" />
+            <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding NewItem.DataType}" />
+        </Grid>
+
+        <Grid Name="grdDataID" Grid.Row="4" Grid.ColumnSpan="3" VerticalAlignment="Top" Visibility="{Binding DataIDVisibility}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="27" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="27" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="27" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="75" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Name" VerticalAlignment="Center" />
+            <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding NewItem.Name}" />
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="ID" VerticalAlignment="Center" />
+            <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding NewItem.ID}" />
+        </Grid>
+
+        <Grid Name="grdField" Grid.Row="4" Grid.ColumnSpan="3" VerticalAlignment="Top" Visibility="{Binding FieldVisibility}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="27" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="27" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="27" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="27" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="27" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="27" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="27" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="27" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="27" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="75" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Name" VerticalAlignment="Center" />
+            <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding NewItem.Name}" />
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Data type" VerticalAlignment="Center" />
+            <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding NewItem.DataType}" />
+
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="PY Data type" VerticalAlignment="Center" />
+            <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding NewItem.PyDataType}" />
+
+            <TextBlock Grid.Row="6" Grid.Column="0" Text="Def. value" VerticalAlignment="Center" />
+            <TextBox Grid.Row="6" Grid.Column="2" Text="{Binding NewItem.DefVal}" />
+
+            <TextBlock Grid.Row="8" Grid.Column="0" Text="Min. value" VerticalAlignment="Center" />
+            <TextBox Grid.Row="8" Grid.Column="2" Text="{Binding NewItem.MinVal}" />
+
+            <TextBlock Grid.Row="10" Grid.Column="0" Text="Max. value" VerticalAlignment="Center" />
+            <TextBox Grid.Row="10" Grid.Column="2" Text="{Binding NewItem.MaxVal}" />
+
+            <TextBlock Grid.Row="12" Grid.Column="0" Text="Unit" VerticalAlignment="Center" />
+            <TextBox Grid.Row="12" Grid.Column="2" Text="{Binding NewItem.Unit}" />
+
+            <TextBlock Grid.Row="14" Grid.Column="0" Text="Offset" VerticalAlignment="Center" />
+            <TextBox Grid.Row="14" Grid.Column="2" Text="{Binding NewItem.Offset}" />
+
+            <TextBlock Grid.Row="16" Grid.Column="0" Text="Res" VerticalAlignment="Center" />
+            <TextBox Grid.Row="16" Grid.Column="2" Text="{Binding NewItem.Res}" />
+        </Grid>
+
+        <StackPanel Grid.Row="6" Grid.ColumnSpan="3" Orientation="Horizontal">
+
+            <Button Content="OK" Command="{Binding OKCommand}" Click="OK_Click" Margin="0,0,5,0" Width="75"/>
+            <Button Content="Cancel" Click="Cancel_Click" Width="75"/>
+
+        </StackPanel>
+
     </Grid>
 </mah:MetroWindow>
